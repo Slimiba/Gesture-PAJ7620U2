@@ -280,6 +280,7 @@ void GESTURE_Actions(void)
 				printf("Left \n");
 				strcpy((char*)ref, "Left \n");
 			}
+
 			break;
 
 		case GestureUp:
