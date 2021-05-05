@@ -113,6 +113,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+	  initializeRegisters();
+	  GESTURE_Actions();
 
     /* USER CODE BEGIN 3 */
   }

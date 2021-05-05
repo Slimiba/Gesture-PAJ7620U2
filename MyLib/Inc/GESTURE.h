@@ -19,8 +19,8 @@
 #define GESTURE_ADDR_SUSPEND_ENL (0x03) /* R */
 #define GESTURE_ADDR_INT1 (0x41) /* R/W */
 #define GESTURE_ADDR_INT2 (0x42) /* R/W */
-#define GESTURE_ADDR_INTFLAG1 (0x43) /* R/W */
-#define GESTURE_ADDR_INTFLAG2 (0x44) /* R/W */
+#define GESTURE_ADDR_INTFLAG1 (0x43) /* R */
+#define GESTURE_ADDR_INTFLAG2 (0x44) /* R */
 #define GESTURE_ADDR_SLEEPMODE (0x45) /* R */
 #define GESTURE_ADDR_PROX_H (0x69) /* R/W */
 #define GESTURE_ADDR_PROX_L (0x6A) /* R/W */
@@ -76,7 +76,7 @@ void GESTURE_Actions(void); /* Sets action flags for gestures */
 
 void initializeRegisters(void); /* Initializes sensors registers */
 uint8_t gestureInit(void); /* Initialize gesture */
-uint8_t registerWrite(uint8_t address, uint8_t cmd); /* Write to address register */
+uint8_t registerWrite(uint8_t address, uint8_t cmd); /* Write to addressed register */
 uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[]); /* Read data from addressed register */
 
 
