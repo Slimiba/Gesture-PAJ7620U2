@@ -69,6 +69,7 @@ __lock___env_recursive_mutex
                     0x1               c:/st/stm32cubeide_1.6.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_1.5.0.202011040924/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
 __lock___sinit_recursive_mutex
                     0x1               c:/st/stm32cubeide_1.6.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_1.5.0.202011040924/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ref                 0x16              MyLib/Src/GESTURE.o
 __lock___malloc_recursive_mutex
                     0x1               c:/st/stm32cubeide_1.6.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_1.5.0.202011040924/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
 HandleUART          0x84              Core/Src/main.o
@@ -3633,19 +3634,19 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 MyLib/Src/GESTURE.o
  .data.RegisterArray
                 0x0000000000000000      0x1b6 MyLib/Src/GESTURE.o
- .rodata        0x0000000000000000       0xeb MyLib/Src/GESTURE.o
+ .rodata        0x0000000000000000      0x166 MyLib/Src/GESTURE.o
  .text.initializeRegisters
-                0x0000000000000000       0x98 MyLib/Src/GESTURE.o
+                0x0000000000000000       0x90 MyLib/Src/GESTURE.o
  .text.GESTURE_Actions
-                0x0000000000000000      0x284 MyLib/Src/GESTURE.o
+                0x0000000000000000      0x388 MyLib/Src/GESTURE.o
  .text.gestureInit
-                0x0000000000000000       0xdc MyLib/Src/GESTURE.o
+                0x0000000000000000       0xd8 MyLib/Src/GESTURE.o
  .text.registerWrite
                 0x0000000000000000       0x98 MyLib/Src/GESTURE.o
  .text.registerRead
                 0x0000000000000000       0xcc MyLib/Src/GESTURE.o
- .debug_info    0x0000000000000000     0x14b1 MyLib/Src/GESTURE.o
- .debug_abbrev  0x0000000000000000      0x271 MyLib/Src/GESTURE.o
+ .debug_info    0x0000000000000000     0x14c3 MyLib/Src/GESTURE.o
+ .debug_abbrev  0x0000000000000000      0x284 MyLib/Src/GESTURE.o
  .debug_aranges
                 0x0000000000000000       0x40 MyLib/Src/GESTURE.o
  .debug_ranges  0x0000000000000000       0x30 MyLib/Src/GESTURE.o
@@ -3728,12 +3729,13 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x16 MyLib/Src/GESTURE.o
  .debug_macro   0x0000000000000000       0x29 MyLib/Src/GESTURE.o
  .debug_macro   0x0000000000000000       0xfa MyLib/Src/GESTURE.o
- .debug_line    0x0000000000000000      0xb72 MyLib/Src/GESTURE.o
+ .debug_line    0x0000000000000000      0xb85 MyLib/Src/GESTURE.o
  .debug_str     0x0000000000000000    0xc7115 MyLib/Src/GESTURE.o
  .comment       0x0000000000000000       0x54 MyLib/Src/GESTURE.o
  .debug_frame   0x0000000000000000       0xd8 MyLib/Src/GESTURE.o
  .ARM.attributes
                 0x0000000000000000       0x34 MyLib/Src/GESTURE.o
+ COMMON         0x0000000000000000       0x16 MyLib/Src/GESTURE.o
  .text          0x0000000000000000        0x0 c:/st/stm32cubeide_1.6.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_1.5.0.202011040924/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-errno.o)
  .data          0x0000000000000000        0x0 c:/st/stm32cubeide_1.6.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_1.5.0.202011040924/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-errno.o)
  .bss           0x0000000000000000        0x0 c:/st/stm32cubeide_1.6.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_1.5.0.202011040924/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-errno.o)

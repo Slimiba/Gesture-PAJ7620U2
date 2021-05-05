@@ -70,7 +70,7 @@
 #define InitialRegister (sizeof(RegisterArray)/sizeof(RegisterArray[0]))
 
 I2C_HandleTypeDef *HandleI2C; /* HandleI2C pointer for I2C Type Def */
-UART_HandleTypeDef HandleUART; /* */
+UART_HandleTypeDef HandleUART; /*  */
 
 void GESTURE_Actions(void); /* Sets action flags for gestures */
 

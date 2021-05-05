@@ -1,5 +1,6 @@
 #include "GESTURE.h"
 
+uint8_t ref[22];
 
 /* Initial Gesture Values
  * initialize registers */
@@ -230,13 +231,13 @@ void initializeRegisters(void){
 
 	error = gestureInit();
 	if(error){
-		strcpy((char*)error, "Initializing Error \n");
+		strcpy((char*)ref, "Initializing Error \n");
 		printf("Initializing Error \n");
 	}else{
-		strcpy((char*)error, "Initialized \n");
+		strcpy((char*)ref, "Initialized \n");
 		printf("Initialized \n");
 	}
-	HAL_UART_Transmit(&HandleUART, error, strlen((char*)error), HAL_MAX_DELAY);
+	HAL_UART_Transmit(&HandleUART, ref, strlen((char*)ref), HAL_MAX_DELAY);
 	HAL_Delay(1000);
 };
 
@@ -252,12 +253,15 @@ void GESTURE_Actions(void)
 			registerRead(0x43, 1, &data0);
 			if(data0 == GestureForward){
 				printf("Forward \n");
+				strcpy((char*)ref, "Forward \n");
 				HAL_Delay(GEST_QUIT_T);
 			}else if(data0 == GestureBackwards){
 				printf("Backwards \n");
+				strcpy((char*)ref, "Backwards \n");
 				HAL_Delay(GEST_QUIT_T);
 			}else{
 				printf("Right \n");
+				strcpy((char*)ref, "Right \n");
 			}
 			break;
 
@@ -266,12 +270,15 @@ void GESTURE_Actions(void)
 			registerRead(0x43, 1, &data0);
 			if(data0 == GestureForward){
 				printf("Forward \n");
+				strcpy((char*)ref, "Forward \n");
 				HAL_Delay(GEST_QUIT_T);
 			}else if(data0 == GestureBackwards){
 				printf("Backwards \n");
+				strcpy((char*)ref, "Backwards \n");
 				HAL_Delay(GEST_QUIT_T);
 			}else{
 				printf("Left \n");
+				strcpy((char*)ref, "Left \n");
 			}
 			break;
 
@@ -280,12 +287,15 @@ void GESTURE_Actions(void)
 			registerRead(0x43, 1, &data0);
 			if(data0 == GestureForward){
 				printf("Forward \n");
+				strcpy((char*)ref, "Forward \n");
 				HAL_Delay(GEST_QUIT_T);
 			}else if(data0 == GestureBackwards){
 				printf("Backwards \n");
+				strcpy((char*)ref, "Backwards \n");
 				HAL_Delay(GEST_QUIT_T);
 			}else{
 				printf("Up \n");
+				strcpy((char*)ref, "Up \n");
 			}
 			break;
 
@@ -294,37 +304,44 @@ void GESTURE_Actions(void)
 			registerRead(0x43, 1, &data0);
 			if(data0 == GestureForward){
 				printf("Forward \n");
+				strcpy((char*)ref, "Forward \n");
 				HAL_Delay(GEST_QUIT_T);
 			}else if(data0 == GestureBackwards){
 				printf("Backwards \n");
+				strcpy((char*)ref, "Backwards \n");
 				HAL_Delay(GEST_QUIT_T);
 			}else{
+				strcpy((char*)ref, "Down \n");
 				printf("Down \n");
 			}
 			break;
 
 		case GestureCW:
 			printf("Clockwise \n");
+			strcpy((char*)ref, "Clockwise \n");
 			HAL_Delay(GEST_QUIT_T);
 			break;
 
 		case GestureACW:
 			printf("Anti-Clockwise \n");
+			strcpy((char*)ref, "Anti-clockwise \n");
 			HAL_Delay(GEST_QUIT_T);
 			break;
 
 		case GestureForward:
 			printf("Forward \n");
+			strcpy((char*)ref, "Forward \n");
 			HAL_Delay(GEST_QUIT_T);
 			break;
 
 		case GestureBackwards:
 			printf("Backwards \n");
+			strcpy((char*)ref, "Backwards \n");
 			HAL_Delay(GEST_QUIT_T);
 			break;
 		}
 	}
-	HAL_UART_Transmit(&HandleUART, data0, strlen((char*)data0), HAL_MAX_DELAY);
+	HAL_UART_Transmit(&HandleUART, ref, strlen((char*)ref), HAL_MAX_DELAY);
 	HAL_Delay(1000);
 };
 
@@ -347,7 +364,7 @@ uint8_t gestureInit(void)
 	}
 
 	if(data0 == 0x20){
-		strcpy((char*)data0, "Wake Up \n");
+		strcpy((char*)ref, "Wake Up \n");
 		printf("Wake Up \n");
 	}
 
@@ -356,7 +373,7 @@ uint8_t gestureInit(void)
 	}
 
 	registerWrite(GESTURE_REG_BANK_SEL, GESTURE_BANK0);
-	HAL_UART_Transmit(&HandleUART, data0, strlen((char*)data0), HAL_MAX_DELAY);
+	HAL_UART_Transmit(&HandleUART, ref, strlen((char*)ref), HAL_MAX_DELAY);
 	HAL_Delay(1000);
 	return result;
 };
@@ -372,10 +389,10 @@ uint8_t registerWrite(uint8_t address, uint8_t cmd)
 
 	if (result != 0)
 	{
-		strcpy((char*)data, "Transmission Error \n");
+		strcpy((char*)ref, "Transmission Error \n");
 		printf("Transmission Error \n");
 	}
-	HAL_UART_Transmit(&HandleUART, data, strlen((char*)data), HAL_MAX_DELAY);
+	HAL_UART_Transmit(&HandleUART, ref, strlen((char*)ref), HAL_MAX_DELAY);
 	HAL_Delay(1000);
 	return result;
 };
@@ -390,19 +407,17 @@ uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
 
 	if (result != 0)
 	{
-		strcpy((char*)tmp, "Error TX \n");
+		strcpy((char*)ref, "Error TX \n");
 		printf("Error TX \n");
 	}
 
 	result = 1;
 	result = HAL_I2C_Master_Receive(HandleI2C, (GESTURE_ADDRESS_I2C << 1) + 1, data, qty, 10);
 	if (result != 0){
-		strcpy((char*)tmp, "Error RX \n");
+		strcpy((char*)ref, "Error RX \n");
 		printf("Error RX \n");
 	}
-	HAL_UART_Transmit(&HandleUART, tmp, strlen((char*)tmp), HAL_MAX_DELAY);
+	HAL_UART_Transmit(&HandleUART, ref, strlen((char*)ref), HAL_MAX_DELAY);
 	HAL_Delay(1000);
 	return result;
 };
-
-
