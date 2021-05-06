@@ -1,4 +1,5 @@
 #include "GESTURE.h"
+#include "GESTUREconf.h"
 
 uint8_t ref[50];
 
@@ -238,7 +239,7 @@ void initializeRegisters(void){
 		printf("Initialized \n");
 	}
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
-	HAL_Delay(1000);
+	HAL_Delay(500);
 };
 
 void GESTURE_Actions(void)
@@ -343,38 +344,38 @@ void GESTURE_Actions(void)
 		}
 	}
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
-	HAL_Delay(1000);
+	HAL_Delay(500);
 };
 
 
 
 
-uint8_t registerWrite(uint8_t address, uint8_t cmd)
+static uint8_t registerWrite(uint8_t address, uint8_t cmd)
 {
-	uint8_t data[3];
-	data[0] = address;
-	data[1] = cmd;
+	uint8_t tmp[3];
+	tmp[0] = address;
+	tmp[1] = cmd;
 	char result = 1;
 
-	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, data, 2, 10);
+	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, tmp, 2, 100);
 
 	if (result != 0)
 	{
-		strcpy((char*)ref, "\r\n Transmission Error");
+		sprintf((char*)ref, "\r\n Transmission Error %d", result);
 		printf("Transmission Error \n");
 	}
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
-	HAL_Delay(1000);
+	HAL_Delay(500);
 	return result;
 };
 
-uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
+static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
 {
 	uint8_t tmp[3];
 	tmp[0] = address;
 	char result = 1;
 
-	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, tmp, 1, 10);
+	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, tmp, 1, 100);
 
 	if (result != 0)
 	{
@@ -389,11 +390,11 @@ uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
 		printf("Error RX \n");
 	}
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
-	HAL_Delay(1000);
+	HAL_Delay(500);
 	return result;
 };
 
-uint8_t gestureInit(void)
+static uint8_t gestureInit(void)
 {
 	uint8_t data0 = 0;
 	uint8_t data1 = 1;
@@ -420,6 +421,6 @@ uint8_t gestureInit(void)
 
 	registerWrite(GESTURE_REG_BANK_SEL, GESTURE_BANK0);
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
-	HAL_Delay(1000);
+	HAL_Delay(500);
 	return result;
 };
