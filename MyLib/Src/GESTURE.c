@@ -239,7 +239,7 @@ void initializeRegisters(void){
 		printf("Initialized \n");
 	}
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
-	HAL_Delay(500);
+	HAL_Delay(1000);
 };
 
 void GESTURE_Actions(void)
@@ -348,7 +348,35 @@ void GESTURE_Actions(void)
 };
 
 
+static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
+{
+	uint8_t tmp[3];
+	tmp[0] = address;
+	char result = 1;
 
+	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, tmp, 1, 100);
+
+	if (result != 0)
+	{
+		sprintf((char*)ref, "\r\n Error TX %d", result);
+		printf("Error TX \n");
+	}else{
+		sprintf((char*)ref, "\r\n Transmitted %d", result);
+	}
+
+	/* result = 0; */
+	result = HAL_I2C_Master_Receive(&HandleI2C, GESTURE_ADDRESS_I2C << 1, data, qty, 100);
+
+	if (result != 0){
+		sprintf((char*)ref, "\r\n Error RX %d", result);
+		printf("Error RX \n");
+	}else{
+		sprintf((char*)ref, "\r\n Received %d", result);
+	}
+	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
+	HAL_Delay(1000);
+	return result;
+};
 
 static uint8_t registerWrite(uint8_t address, uint8_t cmd)
 {
@@ -371,33 +399,7 @@ static uint8_t registerWrite(uint8_t address, uint8_t cmd)
 	return result;
 };
 
-static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
-{
-	uint8_t tmp[3];
-	tmp[0] = address;
-	char result = 1;
 
-	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, tmp, 1, 100);
-
-	if (result != 0)
-	{
-		sprintf((char*)ref, "\r\n Error TX %d", result);
-		printf("Error TX \n");
-	}
-
-	result = 1;
-	result = HAL_I2C_Master_Receive(&HandleI2C, GESTURE_ADDRESS_I2C << 1, data, qty, 100);
-
-	if (result != 0){
-		sprintf((char*)ref, "\r\n Error RX %d", result);
-		printf("Error RX \n");
-	}else{
-		sprintf((char*)ref, "\r\n Received %d", result);
-	}
-	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
-	HAL_Delay(1000);
-	return result;
-};
 
 uint8_t gestureInit(void)
 {
@@ -417,7 +419,7 @@ uint8_t gestureInit(void)
 
 	if(data0 == 0x20){
 		strcpy((char*)ref, "\n\r Wake Up");
-		printf("\n\rWake Up");
+		printf("\n\r Wake Up");
 	}
 
 	for(int i = 0; i < InitialRegister; i++){
@@ -426,6 +428,6 @@ uint8_t gestureInit(void)
 
 	registerWrite(GESTURE_REG_BANK_SEL, GESTURE_BANK0);
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
-	HAL_Delay(500);
+	HAL_Delay(1000);
 	return result;
 };

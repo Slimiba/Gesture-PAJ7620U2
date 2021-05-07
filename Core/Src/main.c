@@ -111,6 +111,7 @@ int main(void)
   {
 	  initializeRegisters();
 	  GESTURE_Actions();
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
