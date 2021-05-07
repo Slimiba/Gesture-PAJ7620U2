@@ -33,7 +33,8 @@ MyLib/Src/GESTURE.o: ../MyLib/Src/GESTURE.c \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rtc_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h \
- ../Core/Inc/main.h
+ ../Core/Inc/main.h \
+ C:/Users/1/STM32CubeIDE/workspace_1.6.1/Gesture\ PAJ7620U2/MyLib/Inc/GESTUREconf.h
 
 C:/Users/1/STM32CubeIDE/workspace_1.6.1/Gesture\ PAJ7620U2/MyLib/Inc/GESTURE.h:
 
@@ -104,3 +105,5 @@ C:/Users/1/STM32CubeIDE/workspace_1.6.1/Gesture\ PAJ7620U2/Drivers/CMSIS/Include
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h:
 
 ../Core/Inc/main.h:
+
+C:/Users/1/STM32CubeIDE/workspace_1.6.1/Gesture\ PAJ7620U2/MyLib/Inc/GESTUREconf.h:

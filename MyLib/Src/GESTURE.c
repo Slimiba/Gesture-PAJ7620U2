@@ -363,9 +363,11 @@ static uint8_t registerWrite(uint8_t address, uint8_t cmd)
 	{
 		sprintf((char*)ref, "\r\n Transmission Error %d", result);
 		printf("Transmission Error \n");
+	}else{
+		sprintf((char*)ref, "\r\n Transmission Successful %d", result);
 	}
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
-	HAL_Delay(500);
+	HAL_Delay(1000);
 	return result;
 };
 
@@ -379,22 +381,25 @@ static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
 
 	if (result != 0)
 	{
-		strcpy((char*)ref, "\r\n Error TX");
+		sprintf((char*)ref, "\r\n Error TX %d", result);
 		printf("Error TX \n");
 	}
 
 	result = 1;
-	result = HAL_I2C_Master_Receive(&HandleI2C, (GESTURE_ADDRESS_I2C << 1) + 1, data, qty, 10);
+	result = HAL_I2C_Master_Receive(&HandleI2C, GESTURE_ADDRESS_I2C << 1, data, qty, 100);
+
 	if (result != 0){
 		sprintf((char*)ref, "\r\n Error RX %d", result);
 		printf("Error RX \n");
+	}else{
+		sprintf((char*)ref, "\r\n Received %d", result);
 	}
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
-	HAL_Delay(500);
+	HAL_Delay(1000);
 	return result;
 };
 
-static uint8_t gestureInit(void)
+uint8_t gestureInit(void)
 {
 	uint8_t data0 = 0;
 	uint8_t data1 = 1;
@@ -415,7 +420,7 @@ static uint8_t gestureInit(void)
 		printf("\n\rWake Up");
 	}
 
-	for(int i = 1; i < InitialRegister; i++){
+	for(int i = 0; i < InitialRegister; i++){
 		registerWrite(RegisterArray[i][0], RegisterArray[i][1]);
 	}
 
