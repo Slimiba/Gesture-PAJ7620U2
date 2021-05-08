@@ -37,13 +37,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  000227c7  00000000  00000000  00037038  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00010e72  00000000  00000000  000597ff  2**0
+ 17 .debug_line   00010e69  00000000  00000000  000597ff  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000cba6e  00000000  00000000  0006a671  2**0
+ 18 .debug_str    000cbacd  00000000  00000000  0006a668  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  001360df  2**0
+ 19 .comment      00000053  00000000  00000000  00136135  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000407c  00000000  00000000  00136134  2**2
+ 20 .debug_frame  0000407c  00000000  00000000  00136188  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -14607,7 +14607,7 @@ void initializeRegisters(void){
  800618c:	71fb      	strb	r3, [r7, #7]
 
 	error = gestureInit();
- 800618e:	f000 fb29 	bl	80067e4 <gestureInit>
+ 800618e:	f000 fb2b 	bl	80067e8 <gestureInit>
  8006192:	4603      	mov	r3, r0
  8006194:	71fb      	strb	r3, [r7, #7]
 	if(error){
@@ -14699,7 +14699,7 @@ void GESTURE_Actions(void)
 		switch(data0){ /* When will gestures be detected, the "data" will change */
  800623a:	79bb      	ldrb	r3, [r7, #6]
  800623c:	2b80      	cmp	r3, #128	; 0x80
- 800623e:	f000 81bf 	beq.w	80065c0 <GESTURE_Actions+0x3a8>
+ 800623e:	f000 8193 	beq.w	8006568 <GESTURE_Actions+0x350>
  8006242:	2b80      	cmp	r3, #128	; 0x80
  8006244:	f300 81d2 	bgt.w	80065ec <GESTURE_Actions+0x3d4>
  8006248:	2b20      	cmp	r3, #32
@@ -14726,7 +14726,7 @@ void GESTURE_Actions(void)
  8006290:	080065ed 	.word	0x080065ed
  8006294:	080065ed 	.word	0x080065ed
  8006298:	080065ed 	.word	0x080065ed
- 800629c:	0800653f 	.word	0x0800653f
+ 800629c:	08006595 	.word	0x08006595
  80062a0:	080065ed 	.word	0x080065ed
  80062a4:	080065ed 	.word	0x080065ed
  80062a8:	080065ed 	.word	0x080065ed
@@ -14742,9 +14742,9 @@ void GESTURE_Actions(void)
  80062d0:	080065ed 	.word	0x080065ed
  80062d4:	080065ed 	.word	0x080065ed
  80062d8:	080065ed 	.word	0x080065ed
- 80062dc:	08006569 	.word	0x08006569
+ 80062dc:	080065c1 	.word	0x080065c1
  80062e0:	2b40      	cmp	r3, #64	; 0x40
- 80062e2:	f000 8157 	beq.w	8006594 <GESTURE_Actions+0x37c>
+ 80062e2:	f000 812c 	beq.w	800653e <GESTURE_Actions+0x326>
  80062e6:	e181      	b.n	80065ec <GESTURE_Actions+0x3d4>
 		case GestureRight:
 			HAL_Delay(GEST_ENTR_T);
@@ -14758,7 +14758,7 @@ void GESTURE_Actions(void)
  80062f8:	f000 f9b8 	bl	800666c <registerRead>
 			if(data0 == GestureForward){
  80062fc:	79bb      	ldrb	r3, [r7, #6]
- 80062fe:	2b40      	cmp	r3, #64	; 0x40
+ 80062fe:	2b10      	cmp	r3, #16
  8006300:	d115      	bne.n	800632e <GESTURE_Actions+0x116>
 				printf("Forward Gesture \n");
  8006302:	48c4      	ldr	r0, [pc, #784]	; (8006614 <GESTURE_Actions+0x3fc>)
@@ -14790,7 +14790,7 @@ void GESTURE_Actions(void)
  800632c:	e15e      	b.n	80065ec <GESTURE_Actions+0x3d4>
 			}else if(data0 == GestureBackwards){
  800632e:	79bb      	ldrb	r3, [r7, #6]
- 8006330:	2b80      	cmp	r3, #128	; 0x80
+ 8006330:	2b20      	cmp	r3, #32
  8006332:	d114      	bne.n	800635e <GESTURE_Actions+0x146>
 				printf("Backwards \n");
  8006334:	48ba      	ldr	r0, [pc, #744]	; (8006620 <GESTURE_Actions+0x408>)
@@ -14844,7 +14844,7 @@ void GESTURE_Actions(void)
  800638c:	f000 f96e 	bl	800666c <registerRead>
 			if(data0 == GestureForward){
  8006390:	79bb      	ldrb	r3, [r7, #6]
- 8006392:	2b40      	cmp	r3, #64	; 0x40
+ 8006392:	2b10      	cmp	r3, #16
  8006394:	d115      	bne.n	80063c2 <GESTURE_Actions+0x1aa>
 				printf("Forward \n");
  8006396:	48a6      	ldr	r0, [pc, #664]	; (8006630 <GESTURE_Actions+0x418>)
@@ -14876,7 +14876,7 @@ void GESTURE_Actions(void)
  80063c0:	e114      	b.n	80065ec <GESTURE_Actions+0x3d4>
 			}else if(data0 == GestureBackwards){
  80063c2:	79bb      	ldrb	r3, [r7, #6]
- 80063c4:	2b80      	cmp	r3, #128	; 0x80
+ 80063c4:	2b20      	cmp	r3, #32
  80063c6:	d114      	bne.n	80063f2 <GESTURE_Actions+0x1da>
 				printf("Backwards \n");
  80063c8:	4895      	ldr	r0, [pc, #596]	; (8006620 <GESTURE_Actions+0x408>)
@@ -14928,7 +14928,7 @@ void GESTURE_Actions(void)
  800641c:	f000 f926 	bl	800666c <registerRead>
 			if(data0 == GestureForward){
  8006420:	79bb      	ldrb	r3, [r7, #6]
- 8006422:	2b40      	cmp	r3, #64	; 0x40
+ 8006422:	2b10      	cmp	r3, #16
  8006424:	d115      	bne.n	8006452 <GESTURE_Actions+0x23a>
 				printf("Forward \n");
  8006426:	4882      	ldr	r0, [pc, #520]	; (8006630 <GESTURE_Actions+0x418>)
@@ -14960,7 +14960,7 @@ void GESTURE_Actions(void)
  8006450:	e0cc      	b.n	80065ec <GESTURE_Actions+0x3d4>
 			}else if(data0 == GestureBackwards){
  8006452:	79bb      	ldrb	r3, [r7, #6]
- 8006454:	2b80      	cmp	r3, #128	; 0x80
+ 8006454:	2b20      	cmp	r3, #32
  8006456:	d114      	bne.n	8006482 <GESTURE_Actions+0x26a>
 				printf("Backwards \n");
  8006458:	4871      	ldr	r0, [pc, #452]	; (8006620 <GESTURE_Actions+0x408>)
@@ -15017,7 +15017,7 @@ void GESTURE_Actions(void)
  80064b6:	f000 f8d9 	bl	800666c <registerRead>
 			if(data0 == GestureForward){
  80064ba:	79bb      	ldrb	r3, [r7, #6]
- 80064bc:	2b40      	cmp	r3, #64	; 0x40
+ 80064bc:	2b10      	cmp	r3, #16
  80064be:	d115      	bne.n	80064ec <GESTURE_Actions+0x2d4>
 				printf("Forward \n");
  80064c0:	485b      	ldr	r0, [pc, #364]	; (8006630 <GESTURE_Actions+0x418>)
@@ -15049,7 +15049,7 @@ void GESTURE_Actions(void)
  80064ea:	e07f      	b.n	80065ec <GESTURE_Actions+0x3d4>
 			}else if(data0 == GestureBackwards){
  80064ec:	79bb      	ldrb	r3, [r7, #6]
- 80064ee:	2b80      	cmp	r3, #128	; 0x80
+ 80064ee:	2b20      	cmp	r3, #32
  80064f0:	d114      	bne.n	800651c <GESTURE_Actions+0x304>
 				printf("Backwards \n");
  80064f2:	484b      	ldr	r0, [pc, #300]	; (8006620 <GESTURE_Actions+0x408>)
@@ -15237,7 +15237,7 @@ void GESTURE_Actions(void)
 0800666c <registerRead>:
 
 
-static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
+static uint8_t registerRead(uint8_t addr, uint8_t qty, uint8_t data[])
 {
  800666c:	b580      	push	{r7, lr}
  800666e:	b086      	sub	sp, #24
@@ -15248,224 +15248,221 @@ static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
  8006678:	460b      	mov	r3, r1
  800667a:	71bb      	strb	r3, [r7, #6]
 	uint8_t tmp[3];
-	tmp[0] = address;
+	tmp[0] = addr;
  800667c:	79fb      	ldrb	r3, [r7, #7]
  800667e:	733b      	strb	r3, [r7, #12]
 	tmp[1] = qty;
  8006680:	79bb      	ldrb	r3, [r7, #6]
  8006682:	737b      	strb	r3, [r7, #13]
-	char result = 1;
- 8006684:	2301      	movs	r3, #1
- 8006686:	73fb      	strb	r3, [r7, #15]
+	uint8_t result;
 
 	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C, tmp, 1, 100);
- 8006688:	f107 020c 	add.w	r2, r7, #12
- 800668c:	2364      	movs	r3, #100	; 0x64
- 800668e:	9300      	str	r3, [sp, #0]
- 8006690:	2301      	movs	r3, #1
- 8006692:	2173      	movs	r1, #115	; 0x73
- 8006694:	4824      	ldr	r0, [pc, #144]	; (8006728 <registerRead+0xbc>)
- 8006696:	f7fa fdbd 	bl	8001214 <HAL_I2C_Master_Transmit>
- 800669a:	4603      	mov	r3, r0
- 800669c:	73fb      	strb	r3, [r7, #15]
+ 8006684:	f107 020c 	add.w	r2, r7, #12
+ 8006688:	2364      	movs	r3, #100	; 0x64
+ 800668a:	9300      	str	r3, [sp, #0]
+ 800668c:	2301      	movs	r3, #1
+ 800668e:	2173      	movs	r1, #115	; 0x73
+ 8006690:	4824      	ldr	r0, [pc, #144]	; (8006724 <registerRead+0xb8>)
+ 8006692:	f7fa fdbf 	bl	8001214 <HAL_I2C_Master_Transmit>
+ 8006696:	4603      	mov	r3, r0
+ 8006698:	73fb      	strb	r3, [r7, #15]
 
 	if (result != HAL_OK)
- 800669e:	7bfb      	ldrb	r3, [r7, #15]
- 80066a0:	2b00      	cmp	r3, #0
- 80066a2:	d009      	beq.n	80066b8 <registerRead+0x4c>
+ 800669a:	7bfb      	ldrb	r3, [r7, #15]
+ 800669c:	2b00      	cmp	r3, #0
+ 800669e:	d009      	beq.n	80066b4 <registerRead+0x48>
 	{
 		sprintf((char*)ref, "\r\n Error TX %d", result);
- 80066a4:	7bfb      	ldrb	r3, [r7, #15]
- 80066a6:	461a      	mov	r2, r3
- 80066a8:	4920      	ldr	r1, [pc, #128]	; (800672c <registerRead+0xc0>)
- 80066aa:	4821      	ldr	r0, [pc, #132]	; (8006730 <registerRead+0xc4>)
- 80066ac:	f000 f9c6 	bl	8006a3c <siprintf>
+ 80066a0:	7bfb      	ldrb	r3, [r7, #15]
+ 80066a2:	461a      	mov	r2, r3
+ 80066a4:	4920      	ldr	r1, [pc, #128]	; (8006728 <registerRead+0xbc>)
+ 80066a6:	4821      	ldr	r0, [pc, #132]	; (800672c <registerRead+0xc0>)
+ 80066a8:	f000 f9c8 	bl	8006a3c <siprintf>
 		printf("Error TX \n");
- 80066b0:	4820      	ldr	r0, [pc, #128]	; (8006734 <registerRead+0xc8>)
- 80066b2:	f000 f9bb 	bl	8006a2c <puts>
- 80066b6:	e005      	b.n	80066c4 <registerRead+0x58>
+ 80066ac:	4820      	ldr	r0, [pc, #128]	; (8006730 <registerRead+0xc4>)
+ 80066ae:	f000 f9bd 	bl	8006a2c <puts>
+ 80066b2:	e005      	b.n	80066c0 <registerRead+0x54>
 	}else{
 		sprintf((char*)ref, "\r\n Transmitted %d", result);
- 80066b8:	7bfb      	ldrb	r3, [r7, #15]
- 80066ba:	461a      	mov	r2, r3
- 80066bc:	491e      	ldr	r1, [pc, #120]	; (8006738 <registerRead+0xcc>)
- 80066be:	481c      	ldr	r0, [pc, #112]	; (8006730 <registerRead+0xc4>)
- 80066c0:	f000 f9bc 	bl	8006a3c <siprintf>
+ 80066b4:	7bfb      	ldrb	r3, [r7, #15]
+ 80066b6:	461a      	mov	r2, r3
+ 80066b8:	491e      	ldr	r1, [pc, #120]	; (8006734 <registerRead+0xc8>)
+ 80066ba:	481c      	ldr	r0, [pc, #112]	; (800672c <registerRead+0xc0>)
+ 80066bc:	f000 f9be 	bl	8006a3c <siprintf>
 	}
 
 	/* result = 0; */
 	result = HAL_I2C_Master_Receive(&HandleI2C, GESTURE_ADDRESS_I2C, data, qty, 100);
- 80066c4:	79bb      	ldrb	r3, [r7, #6]
- 80066c6:	b29b      	uxth	r3, r3
- 80066c8:	2264      	movs	r2, #100	; 0x64
- 80066ca:	9200      	str	r2, [sp, #0]
- 80066cc:	683a      	ldr	r2, [r7, #0]
- 80066ce:	2173      	movs	r1, #115	; 0x73
- 80066d0:	4815      	ldr	r0, [pc, #84]	; (8006728 <registerRead+0xbc>)
- 80066d2:	f7fa fe93 	bl	80013fc <HAL_I2C_Master_Receive>
- 80066d6:	4603      	mov	r3, r0
- 80066d8:	73fb      	strb	r3, [r7, #15]
+ 80066c0:	79bb      	ldrb	r3, [r7, #6]
+ 80066c2:	b29b      	uxth	r3, r3
+ 80066c4:	2264      	movs	r2, #100	; 0x64
+ 80066c6:	9200      	str	r2, [sp, #0]
+ 80066c8:	683a      	ldr	r2, [r7, #0]
+ 80066ca:	2173      	movs	r1, #115	; 0x73
+ 80066cc:	4815      	ldr	r0, [pc, #84]	; (8006724 <registerRead+0xb8>)
+ 80066ce:	f7fa fe95 	bl	80013fc <HAL_I2C_Master_Receive>
+ 80066d2:	4603      	mov	r3, r0
+ 80066d4:	73fb      	strb	r3, [r7, #15]
 
 	if (result != HAL_OK){
- 80066da:	7bfb      	ldrb	r3, [r7, #15]
- 80066dc:	2b00      	cmp	r3, #0
- 80066de:	d009      	beq.n	80066f4 <registerRead+0x88>
+ 80066d6:	7bfb      	ldrb	r3, [r7, #15]
+ 80066d8:	2b00      	cmp	r3, #0
+ 80066da:	d009      	beq.n	80066f0 <registerRead+0x84>
 		sprintf((char*)ref, "\r\n Error RX %d", result);
- 80066e0:	7bfb      	ldrb	r3, [r7, #15]
- 80066e2:	461a      	mov	r2, r3
- 80066e4:	4915      	ldr	r1, [pc, #84]	; (800673c <registerRead+0xd0>)
- 80066e6:	4812      	ldr	r0, [pc, #72]	; (8006730 <registerRead+0xc4>)
- 80066e8:	f000 f9a8 	bl	8006a3c <siprintf>
+ 80066dc:	7bfb      	ldrb	r3, [r7, #15]
+ 80066de:	461a      	mov	r2, r3
+ 80066e0:	4915      	ldr	r1, [pc, #84]	; (8006738 <registerRead+0xcc>)
+ 80066e2:	4812      	ldr	r0, [pc, #72]	; (800672c <registerRead+0xc0>)
+ 80066e4:	f000 f9aa 	bl	8006a3c <siprintf>
 		printf("Error RX \n");
- 80066ec:	4814      	ldr	r0, [pc, #80]	; (8006740 <registerRead+0xd4>)
- 80066ee:	f000 f99d 	bl	8006a2c <puts>
- 80066f2:	e005      	b.n	8006700 <registerRead+0x94>
+ 80066e8:	4814      	ldr	r0, [pc, #80]	; (800673c <registerRead+0xd0>)
+ 80066ea:	f000 f99f 	bl	8006a2c <puts>
+ 80066ee:	e005      	b.n	80066fc <registerRead+0x90>
 	}else{
 		sprintf((char*)ref, "\r\n Received %d", result);
- 80066f4:	7bfb      	ldrb	r3, [r7, #15]
- 80066f6:	461a      	mov	r2, r3
- 80066f8:	4912      	ldr	r1, [pc, #72]	; (8006744 <registerRead+0xd8>)
- 80066fa:	480d      	ldr	r0, [pc, #52]	; (8006730 <registerRead+0xc4>)
- 80066fc:	f000 f99e 	bl	8006a3c <siprintf>
+ 80066f0:	7bfb      	ldrb	r3, [r7, #15]
+ 80066f2:	461a      	mov	r2, r3
+ 80066f4:	4912      	ldr	r1, [pc, #72]	; (8006740 <registerRead+0xd4>)
+ 80066f6:	480d      	ldr	r0, [pc, #52]	; (800672c <registerRead+0xc0>)
+ 80066f8:	f000 f9a0 	bl	8006a3c <siprintf>
 	}
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
- 8006700:	480b      	ldr	r0, [pc, #44]	; (8006730 <registerRead+0xc4>)
- 8006702:	f7f9 fd6d 	bl	80001e0 <strlen>
- 8006706:	4603      	mov	r3, r0
- 8006708:	b29a      	uxth	r2, r3
- 800670a:	f04f 33ff 	mov.w	r3, #4294967295
- 800670e:	4908      	ldr	r1, [pc, #32]	; (8006730 <registerRead+0xc4>)
- 8006710:	480d      	ldr	r0, [pc, #52]	; (8006748 <registerRead+0xdc>)
- 8006712:	f7fd ff56 	bl	80045c2 <HAL_UART_Transmit>
+ 80066fc:	480b      	ldr	r0, [pc, #44]	; (800672c <registerRead+0xc0>)
+ 80066fe:	f7f9 fd6f 	bl	80001e0 <strlen>
+ 8006702:	4603      	mov	r3, r0
+ 8006704:	b29a      	uxth	r2, r3
+ 8006706:	f04f 33ff 	mov.w	r3, #4294967295
+ 800670a:	4908      	ldr	r1, [pc, #32]	; (800672c <registerRead+0xc0>)
+ 800670c:	480d      	ldr	r0, [pc, #52]	; (8006744 <registerRead+0xd8>)
+ 800670e:	f7fd ff58 	bl	80045c2 <HAL_UART_Transmit>
 	HAL_Delay(1000);
- 8006716:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
- 800671a:	f7fa fa13 	bl	8000b44 <HAL_Delay>
+ 8006712:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+ 8006716:	f7fa fa15 	bl	8000b44 <HAL_Delay>
 	return result;
- 800671e:	7bfb      	ldrb	r3, [r7, #15]
+ 800671a:	7bfb      	ldrb	r3, [r7, #15]
 };
- 8006720:	4618      	mov	r0, r3
- 8006722:	3710      	adds	r7, #16
- 8006724:	46bd      	mov	sp, r7
- 8006726:	bd80      	pop	{r7, pc}
- 8006728:	20000344 	.word	0x20000344
- 800672c:	08007e30 	.word	0x08007e30
- 8006730:	20000680 	.word	0x20000680
- 8006734:	08007e40 	.word	0x08007e40
- 8006738:	08007e4c 	.word	0x08007e4c
- 800673c:	08007e60 	.word	0x08007e60
- 8006740:	08007e70 	.word	0x08007e70
- 8006744:	08007e7c 	.word	0x08007e7c
- 8006748:	20000250 	.word	0x20000250
+ 800671c:	4618      	mov	r0, r3
+ 800671e:	3710      	adds	r7, #16
+ 8006720:	46bd      	mov	sp, r7
+ 8006722:	bd80      	pop	{r7, pc}
+ 8006724:	20000344 	.word	0x20000344
+ 8006728:	08007e30 	.word	0x08007e30
+ 800672c:	20000680 	.word	0x20000680
+ 8006730:	08007e40 	.word	0x08007e40
+ 8006734:	08007e4c 	.word	0x08007e4c
+ 8006738:	08007e60 	.word	0x08007e60
+ 800673c:	08007e70 	.word	0x08007e70
+ 8006740:	08007e7c 	.word	0x08007e7c
+ 8006744:	20000250 	.word	0x20000250
 
-0800674c <registerWrite>:
+08006748 <registerWrite>:
 
-static void registerWrite(uint8_t address, uint8_t cmd)
+static void registerWrite(uint8_t addr, uint8_t cmd)
 {
- 800674c:	b580      	push	{r7, lr}
- 800674e:	b086      	sub	sp, #24
- 8006750:	af02      	add	r7, sp, #8
- 8006752:	4603      	mov	r3, r0
- 8006754:	460a      	mov	r2, r1
- 8006756:	71fb      	strb	r3, [r7, #7]
- 8006758:	4613      	mov	r3, r2
- 800675a:	71bb      	strb	r3, [r7, #6]
-	uint8_t tmp[3];
-	tmp[0] = address;
- 800675c:	79fb      	ldrb	r3, [r7, #7]
- 800675e:	733b      	strb	r3, [r7, #12]
-	tmp[1] = cmd;
- 8006760:	79bb      	ldrb	r3, [r7, #6]
- 8006762:	737b      	strb	r3, [r7, #13]
-	char result = 1;
- 8006764:	2301      	movs	r3, #1
- 8006766:	73fb      	strb	r3, [r7, #15]
+ 8006748:	b580      	push	{r7, lr}
+ 800674a:	b086      	sub	sp, #24
+ 800674c:	af02      	add	r7, sp, #8
+ 800674e:	4603      	mov	r3, r0
+ 8006750:	460a      	mov	r2, r1
+ 8006752:	71fb      	strb	r3, [r7, #7]
+ 8006754:	4613      	mov	r3, r2
+ 8006756:	71bb      	strb	r3, [r7, #6]
+	uint8_t tmp[3] = { addr, cmd };
+ 8006758:	f107 030c 	add.w	r3, r7, #12
+ 800675c:	2100      	movs	r1, #0
+ 800675e:	460a      	mov	r2, r1
+ 8006760:	801a      	strh	r2, [r3, #0]
+ 8006762:	460a      	mov	r2, r1
+ 8006764:	709a      	strb	r2, [r3, #2]
+ 8006766:	79fb      	ldrb	r3, [r7, #7]
+ 8006768:	733b      	strb	r3, [r7, #12]
+ 800676a:	79bb      	ldrb	r3, [r7, #6]
+ 800676c:	737b      	strb	r3, [r7, #13]
+	char result;
 
 	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C, tmp, 2, 100);
- 8006768:	f107 020c 	add.w	r2, r7, #12
- 800676c:	2364      	movs	r3, #100	; 0x64
- 800676e:	9300      	str	r3, [sp, #0]
- 8006770:	2302      	movs	r3, #2
- 8006772:	2173      	movs	r1, #115	; 0x73
- 8006774:	4815      	ldr	r0, [pc, #84]	; (80067cc <registerWrite+0x80>)
- 8006776:	f7fa fd4d 	bl	8001214 <HAL_I2C_Master_Transmit>
- 800677a:	4603      	mov	r3, r0
- 800677c:	73fb      	strb	r3, [r7, #15]
+ 800676e:	f107 020c 	add.w	r2, r7, #12
+ 8006772:	2364      	movs	r3, #100	; 0x64
+ 8006774:	9300      	str	r3, [sp, #0]
+ 8006776:	2302      	movs	r3, #2
+ 8006778:	2173      	movs	r1, #115	; 0x73
+ 800677a:	4815      	ldr	r0, [pc, #84]	; (80067d0 <registerWrite+0x88>)
+ 800677c:	f7fa fd4a 	bl	8001214 <HAL_I2C_Master_Transmit>
+ 8006780:	4603      	mov	r3, r0
+ 8006782:	73fb      	strb	r3, [r7, #15]
 
 	if (result != HAL_OK)
- 800677e:	7bfb      	ldrb	r3, [r7, #15]
- 8006780:	2b00      	cmp	r3, #0
- 8006782:	d009      	beq.n	8006798 <registerWrite+0x4c>
+ 8006784:	7bfb      	ldrb	r3, [r7, #15]
+ 8006786:	2b00      	cmp	r3, #0
+ 8006788:	d009      	beq.n	800679e <registerWrite+0x56>
 	{
 		sprintf((char*)ref, "\r\n Transmission Error %d", result);
- 8006784:	7bfb      	ldrb	r3, [r7, #15]
- 8006786:	461a      	mov	r2, r3
- 8006788:	4911      	ldr	r1, [pc, #68]	; (80067d0 <registerWrite+0x84>)
- 800678a:	4812      	ldr	r0, [pc, #72]	; (80067d4 <registerWrite+0x88>)
- 800678c:	f000 f956 	bl	8006a3c <siprintf>
+ 800678a:	7bfb      	ldrb	r3, [r7, #15]
+ 800678c:	461a      	mov	r2, r3
+ 800678e:	4911      	ldr	r1, [pc, #68]	; (80067d4 <registerWrite+0x8c>)
+ 8006790:	4811      	ldr	r0, [pc, #68]	; (80067d8 <registerWrite+0x90>)
+ 8006792:	f000 f953 	bl	8006a3c <siprintf>
 		printf("Transmission Error \n");
- 8006790:	4811      	ldr	r0, [pc, #68]	; (80067d8 <registerWrite+0x8c>)
- 8006792:	f000 f94b 	bl	8006a2c <puts>
- 8006796:	e005      	b.n	80067a4 <registerWrite+0x58>
+ 8006796:	4811      	ldr	r0, [pc, #68]	; (80067dc <registerWrite+0x94>)
+ 8006798:	f000 f948 	bl	8006a2c <puts>
+ 800679c:	e005      	b.n	80067aa <registerWrite+0x62>
 	}else{
 		sprintf((char*)ref, "\r\n Transmission Successful %d", result);
- 8006798:	7bfb      	ldrb	r3, [r7, #15]
- 800679a:	461a      	mov	r2, r3
- 800679c:	490f      	ldr	r1, [pc, #60]	; (80067dc <registerWrite+0x90>)
- 800679e:	480d      	ldr	r0, [pc, #52]	; (80067d4 <registerWrite+0x88>)
- 80067a0:	f000 f94c 	bl	8006a3c <siprintf>
+ 800679e:	7bfb      	ldrb	r3, [r7, #15]
+ 80067a0:	461a      	mov	r2, r3
+ 80067a2:	490f      	ldr	r1, [pc, #60]	; (80067e0 <registerWrite+0x98>)
+ 80067a4:	480c      	ldr	r0, [pc, #48]	; (80067d8 <registerWrite+0x90>)
+ 80067a6:	f000 f949 	bl	8006a3c <siprintf>
 	}
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
- 80067a4:	480b      	ldr	r0, [pc, #44]	; (80067d4 <registerWrite+0x88>)
- 80067a6:	f7f9 fd1b 	bl	80001e0 <strlen>
- 80067aa:	4603      	mov	r3, r0
- 80067ac:	b29a      	uxth	r2, r3
- 80067ae:	f04f 33ff 	mov.w	r3, #4294967295
- 80067b2:	4908      	ldr	r1, [pc, #32]	; (80067d4 <registerWrite+0x88>)
- 80067b4:	480a      	ldr	r0, [pc, #40]	; (80067e0 <registerWrite+0x94>)
- 80067b6:	f7fd ff04 	bl	80045c2 <HAL_UART_Transmit>
+ 80067aa:	480b      	ldr	r0, [pc, #44]	; (80067d8 <registerWrite+0x90>)
+ 80067ac:	f7f9 fd18 	bl	80001e0 <strlen>
+ 80067b0:	4603      	mov	r3, r0
+ 80067b2:	b29a      	uxth	r2, r3
+ 80067b4:	f04f 33ff 	mov.w	r3, #4294967295
+ 80067b8:	4907      	ldr	r1, [pc, #28]	; (80067d8 <registerWrite+0x90>)
+ 80067ba:	480a      	ldr	r0, [pc, #40]	; (80067e4 <registerWrite+0x9c>)
+ 80067bc:	f7fd ff01 	bl	80045c2 <HAL_UART_Transmit>
 	HAL_Delay(1000);
- 80067ba:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
- 80067be:	f7fa f9c1 	bl	8000b44 <HAL_Delay>
+ 80067c0:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+ 80067c4:	f7fa f9be 	bl	8000b44 <HAL_Delay>
 };
- 80067c2:	bf00      	nop
- 80067c4:	3710      	adds	r7, #16
- 80067c6:	46bd      	mov	sp, r7
- 80067c8:	bd80      	pop	{r7, pc}
- 80067ca:	bf00      	nop
- 80067cc:	20000344 	.word	0x20000344
- 80067d0:	08007e8c 	.word	0x08007e8c
- 80067d4:	20000680 	.word	0x20000680
- 80067d8:	08007ea8 	.word	0x08007ea8
- 80067dc:	08007ebc 	.word	0x08007ebc
- 80067e0:	20000250 	.word	0x20000250
+ 80067c8:	bf00      	nop
+ 80067ca:	3710      	adds	r7, #16
+ 80067cc:	46bd      	mov	sp, r7
+ 80067ce:	bd80      	pop	{r7, pc}
+ 80067d0:	20000344 	.word	0x20000344
+ 80067d4:	08007e8c 	.word	0x08007e8c
+ 80067d8:	20000680 	.word	0x20000680
+ 80067dc:	08007ea8 	.word	0x08007ea8
+ 80067e0:	08007ebc 	.word	0x08007ebc
+ 80067e4:	20000250 	.word	0x20000250
 
-080067e4 <gestureInit>:
+080067e8 <gestureInit>:
 
 
 
 uint8_t gestureInit(void)
 {
- 80067e4:	b580      	push	{r7, lr}
- 80067e6:	b084      	sub	sp, #16
- 80067e8:	af00      	add	r7, sp, #0
+ 80067e8:	b580      	push	{r7, lr}
+ 80067ea:	b084      	sub	sp, #16
+ 80067ec:	af00      	add	r7, sp, #0
 	uint8_t data0 = 0;
- 80067ea:	2300      	movs	r3, #0
- 80067ec:	71fb      	strb	r3, [r7, #7]
+ 80067ee:	2300      	movs	r3, #0
+ 80067f0:	71fb      	strb	r3, [r7, #7]
 	uint8_t data1 = 1;
- 80067ee:	2301      	movs	r3, #1
- 80067f0:	71bb      	strb	r3, [r7, #6]
-	int result = 0;
- 80067f2:	2300      	movs	r3, #0
- 80067f4:	60fb      	str	r3, [r7, #12]
+ 80067f2:	2301      	movs	r3, #1
+ 80067f4:	71bb      	strb	r3, [r7, #6]
+	int result;
 
 	registerWrite(GESTURE_REG_BANK_SEL, GESTURE_BANK0);
  80067f6:	2100      	movs	r1, #0
  80067f8:	20ef      	movs	r0, #239	; 0xef
- 80067fa:	f7ff ffa7 	bl	800674c <registerWrite>
+ 80067fa:	f7ff ffa5 	bl	8006748 <registerWrite>
 	registerWrite(GESTURE_REG_BANK_SEL, GESTURE_BANK0);
  80067fe:	2100      	movs	r1, #0
  8006800:	20ef      	movs	r0, #239	; 0xef
- 8006802:	f7ff ffa3 	bl	800674c <registerWrite>
+ 8006802:	f7ff ffa1 	bl	8006748 <registerWrite>
 
 	registerRead(0,1, &data0);
  8006806:	1dfb      	adds	r3, r7, #7
@@ -15483,10 +15480,10 @@ uint8_t gestureInit(void)
 	if ((data0 != 0x20) || (data1 != 0x76)){
  800681e:	79fb      	ldrb	r3, [r7, #7]
  8006820:	2b20      	cmp	r3, #32
- 8006822:	d102      	bne.n	800682a <gestureInit+0x46>
+ 8006822:	d102      	bne.n	800682a <gestureInit+0x42>
  8006824:	79bb      	ldrb	r3, [r7, #6]
  8006826:	2b76      	cmp	r3, #118	; 0x76
- 8006828:	d001      	beq.n	800682e <gestureInit+0x4a>
+ 8006828:	d001      	beq.n	800682e <gestureInit+0x46>
 		result = 1;
  800682a:	2301      	movs	r3, #1
  800682c:	60fb      	str	r3, [r7, #12]
@@ -15495,10 +15492,10 @@ uint8_t gestureInit(void)
 	if(data0 == 0x20){
  800682e:	79fb      	ldrb	r3, [r7, #7]
  8006830:	2b20      	cmp	r3, #32
- 8006832:	d10b      	bne.n	800684c <gestureInit+0x68>
+ 8006832:	d10b      	bne.n	800684c <gestureInit+0x64>
 		strcpy((char*)ref, "\n\r Wake Up");
- 8006834:	4a1d      	ldr	r2, [pc, #116]	; (80068ac <gestureInit+0xc8>)
- 8006836:	4b1e      	ldr	r3, [pc, #120]	; (80068b0 <gestureInit+0xcc>)
+ 8006834:	4a1d      	ldr	r2, [pc, #116]	; (80068ac <gestureInit+0xc4>)
+ 8006836:	4b1e      	ldr	r3, [pc, #120]	; (80068b0 <gestureInit+0xc8>)
  8006838:	cb03      	ldmia	r3!, {r0, r1}
  800683a:	6010      	str	r0, [r2, #0]
  800683c:	6051      	str	r1, [r2, #4]
@@ -15507,47 +15504,47 @@ uint8_t gestureInit(void)
  8006842:	8111      	strh	r1, [r2, #8]
  8006844:	7293      	strb	r3, [r2, #10]
 		printf("\n\r Wake Up");
- 8006846:	481a      	ldr	r0, [pc, #104]	; (80068b0 <gestureInit+0xcc>)
+ 8006846:	481a      	ldr	r0, [pc, #104]	; (80068b0 <gestureInit+0xc8>)
  8006848:	f000 f86a 	bl	8006920 <iprintf>
 	}
 
 	for(int i = 0; i < InitialRegister; i++){
  800684c:	2300      	movs	r3, #0
  800684e:	60bb      	str	r3, [r7, #8]
- 8006850:	e00f      	b.n	8006872 <gestureInit+0x8e>
+ 8006850:	e00f      	b.n	8006872 <gestureInit+0x8a>
 		registerWrite(RegisterArray[i][0], RegisterArray[i][1]);
- 8006852:	4a18      	ldr	r2, [pc, #96]	; (80068b4 <gestureInit+0xd0>)
+ 8006852:	4a18      	ldr	r2, [pc, #96]	; (80068b4 <gestureInit+0xcc>)
  8006854:	68bb      	ldr	r3, [r7, #8]
  8006856:	f812 2013 	ldrb.w	r2, [r2, r3, lsl #1]
- 800685a:	4916      	ldr	r1, [pc, #88]	; (80068b4 <gestureInit+0xd0>)
+ 800685a:	4916      	ldr	r1, [pc, #88]	; (80068b4 <gestureInit+0xcc>)
  800685c:	68bb      	ldr	r3, [r7, #8]
  800685e:	005b      	lsls	r3, r3, #1
  8006860:	440b      	add	r3, r1
  8006862:	785b      	ldrb	r3, [r3, #1]
  8006864:	4619      	mov	r1, r3
  8006866:	4610      	mov	r0, r2
- 8006868:	f7ff ff70 	bl	800674c <registerWrite>
+ 8006868:	f7ff ff6e 	bl	8006748 <registerWrite>
 	for(int i = 0; i < InitialRegister; i++){
  800686c:	68bb      	ldr	r3, [r7, #8]
  800686e:	3301      	adds	r3, #1
  8006870:	60bb      	str	r3, [r7, #8]
  8006872:	68bb      	ldr	r3, [r7, #8]
  8006874:	2bda      	cmp	r3, #218	; 0xda
- 8006876:	d9ec      	bls.n	8006852 <gestureInit+0x6e>
+ 8006876:	d9ec      	bls.n	8006852 <gestureInit+0x6a>
 	}
 
 	registerWrite(GESTURE_REG_BANK_SEL, GESTURE_BANK0);
  8006878:	2100      	movs	r1, #0
  800687a:	20ef      	movs	r0, #239	; 0xef
- 800687c:	f7ff ff66 	bl	800674c <registerWrite>
+ 800687c:	f7ff ff64 	bl	8006748 <registerWrite>
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
- 8006880:	480a      	ldr	r0, [pc, #40]	; (80068ac <gestureInit+0xc8>)
+ 8006880:	480a      	ldr	r0, [pc, #40]	; (80068ac <gestureInit+0xc4>)
  8006882:	f7f9 fcad 	bl	80001e0 <strlen>
  8006886:	4603      	mov	r3, r0
  8006888:	b29a      	uxth	r2, r3
  800688a:	f04f 33ff 	mov.w	r3, #4294967295
- 800688e:	4907      	ldr	r1, [pc, #28]	; (80068ac <gestureInit+0xc8>)
- 8006890:	4809      	ldr	r0, [pc, #36]	; (80068b8 <gestureInit+0xd4>)
+ 800688e:	4907      	ldr	r1, [pc, #28]	; (80068ac <gestureInit+0xc4>)
+ 8006890:	4809      	ldr	r0, [pc, #36]	; (80068b8 <gestureInit+0xd0>)
  8006892:	f7fd fe96 	bl	80045c2 <HAL_UART_Transmit>
 	HAL_Delay(1000);
  8006896:	f44f 707a 	mov.w	r0, #1000	; 0x3e8

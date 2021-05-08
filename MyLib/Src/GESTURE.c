@@ -18,8 +18,8 @@ unsigned char RegisterArray[][2] = {
 		{0x3A, 0x12},
 		{0x3F, 0x00},
 		{0x40, 0x02},
-		{0x41, 0xFF},
-		{0x42, 0x01},
+		{0x41, 0x00},
+		{0x42, 0x00},
 		{0x46, 0x2D},
 		{0x47, 0x0F},
 		{0x48, 0x3C},
@@ -78,8 +78,8 @@ unsigned char RegisterArray[][2] = {
 		{0x92, 0x1E},
 		{0x93, 0x0D},
 		{0x94, 0x0A},
-		{0x95, 0x0C},
-		{0x96, 0x0A},
+		{0x95, 0x0A},
+		{0x96, 0x0C},
 		{0x97, 0x05},
 		{0x98, 0x0A},
 		{0x99, 0x41},
@@ -173,7 +173,7 @@ unsigned char RegisterArray[][2] = {
 		{0x3E, 0xFF},
 		{0x3F, 0x00},
 		{0x40, 0x77},
-		{0x41, 0x40},
+		{0x41, 0x00},
 		{0x42, 0x00},
 		{0x43, 0x30},
 		{0x44, 0xA0},
@@ -348,12 +348,12 @@ void GESTURE_Actions(void)
 };
 
 
-static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
+static uint8_t registerRead(uint8_t addr, uint8_t qty, uint8_t data[])
 {
 	uint8_t tmp[3];
-	tmp[0] = address;
+	tmp[0] = addr;
 	tmp[1] = qty;
-	char result = 1;
+	uint8_t result;
 
 	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C, tmp, 1, 100);
 
@@ -379,12 +379,10 @@ static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
 	return result;
 };
 
-static void registerWrite(uint8_t address, uint8_t cmd)
+static void registerWrite(uint8_t addr, uint8_t cmd)
 {
-	uint8_t tmp[3];
-	tmp[0] = address;
-	tmp[1] = cmd;
-	char result = 1;
+	uint8_t tmp[3] = { addr, cmd };
+	char result;
 
 	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C, tmp, 2, 100);
 
@@ -405,7 +403,7 @@ uint8_t gestureInit(void)
 {
 	uint8_t data0 = 0;
 	uint8_t data1 = 1;
-	int result = 0;
+	int result;
 
 	registerWrite(GESTURE_REG_BANK_SEL, GESTURE_BANK0);
 	registerWrite(GESTURE_REG_BANK_SEL, GESTURE_BANK0);

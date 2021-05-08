@@ -5,3 +5,8 @@
 *.list
 *.map
 *.su
+Debug/Gesture PAJ7620U2.elf
+Debug/Gesture PAJ7620U2.bin
+Debug/Gesture PAJ7620U2.list
+Debug/Gesture PAJ7620U2.map
+Debug/MyLib/Src/GESTURE.o

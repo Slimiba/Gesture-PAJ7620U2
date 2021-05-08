@@ -18,31 +18,31 @@
 #define GESTURE_ADDR_PARTID_H (0x01)
 #define GESTURE_ADDR_VERSIONID (0x02) */
 #define GESTURE_ADDR_SUSPEND_ENL (0x03) /* R */
-#define GESTURE_ADDR_INT1 (0x41) /* R/W */
-#define GESTURE_ADDR_INT2 (0x42) /* R/W */
-#define GESTURE_ADDR_INTFLAG1 (0x43) /* R */
-#define GESTURE_ADDR_INTFLAG2 (0x44) /* R */
-#define GESTURE_ADDR_SLEEPMODE (0x45) /* R */
-#define GESTURE_ADDR_PROX_H (0x69) /* R/W */
-#define GESTURE_ADDR_PROX_L (0x6A) /* R/W */
-#define GESTURE_ADDR_PROX_STATE (0x6B) /* R */
-#define GESTURE_ADDR_PROX_AVG (0x6C) /* R */
+#define GESTURE_ADDR_GEST_DETECT_INT1 (0x41) /* R/W */
+#define GESTURE_ADDR_GEST_DETECT_INT2 (0x42) /* R/W */
+#define GESTURE_ADDR_GEST_DETECT_INTFLAG1 (0x43) /* R */
+#define GESTURE_ADDR_GEST_DETECT_INTFLAG2 (0x44) /* R */
+#define GESTURE_ADDR_STATE_INDIC (0x45) /* R */
+#define GESTURE_ADDR_PS_HIGH_THRESH (0x69) /* R/W */
+#define GESTURE_ADDR_PS_LOW_THRESH (0x6A) /* R/W */
+#define GESTURE_ADDR_PS_APPROACH_STATE (0x6B) /* R */
+#define GESTURE_ADDR_PS_DATA (0x6C) /* R */
 
-#define GESTURE_BANK0 0 /* Define Value for Bank 0 */
+#define GESTURE_BANK0 0x00 /* Define Value for Bank 0 */
 
 /* Bank 1 Registers, setting the address */
-#define GESTURE_ADDR_IDLE_SLEEP1_1 (0x67) /* R/W */
-#define GESTURE_ADDR_IDLE_SLEEP1_2 (0X68) /* R/W */
-#define GESTURE_ADDR_IDLE_SLEEP2_1 (0x69) /* R/W */
-#define GESTURE_ADDR_IDLE_SLEEP2_2 (0x6A) /* R/W */
-#define GESTURE_ADDR_OBJ_T1_1 (0x6B) /* R/W */
-#define GESTURE_ADDR_OBJ_T1_2 (0x6C) /* R/W */
-#define GESTURE_ADDR_OBJ_T2_1 (0x6D) /* R/W */
-#define GESTURE_ADDR_OBJ_T2_2 (0x6E) /* R/W */
-#define GESTURE_ADDR_TG_ENABLE (0x72) /* R/W */
-#define GESTURE_ADDR_GAIN_PS (0x44) /* R/W */
+#define GESTURE_ADDR_IDLE_S1_STEP1 (0x67) /* R/W */
+#define GESTURE_ADDR_IDLE_S1_STEP2 (0X68) /* R/W */
+#define GESTURE_ADDR_IDLE_S2_STEP1 (0x69) /* R/W */
+#define GESTURE_ADDR_IDLE_S2_STEP2 (0x6A) /* R/W */
+#define GESTURE_ADDR_OP_TO_S1_STEP1 (0x6B) /* R/W */
+#define GESTURE_ADDR_OP_TO_S1_STEP2 (0x6C) /* R/W */
+#define GESTURE_ADDR_OP_TO_S2_STEP1 (0x6D) /* R/W */
+#define GESTURE_ADDR_OP_TO_S2_STEP2 (0x6E) /* R/W */
+#define GESTURE_ADDR_OP_ENABLE (0x72) /* R/W */
+#define GESTURE_ADDR_PS_GAIN (0x44) /* R/W */
 
-#define GESTURE_BANK1 1 /* Define Value for Bank 1 */
+#define GESTURE_BANK1 0x01 /* Define Value for Bank 1 */
 
 
 #define GESTURE_ENABLE 0x01 /* Enable address operations */
@@ -60,12 +60,12 @@
 
 #define GestureRight GESTURE_Value(1,0)
 #define GestureLeft GESTURE_Value(1,1)
-#define GestureUp GESTURE_Value(1,2)
-#define GestureDown GESTURE_Value(1,3)
-#define GestureCW GESTURE_Value(1,4)
-#define GestureACW GESTURE_Value(1,5)
-#define GestureForward GESTURE_Value(1,6)
-#define GestureBackwards GESTURE_Value(1,7)
+#define GestureDown GESTURE_Value(1,2)
+#define GestureUp GESTURE_Value(1,3)
+#define GestureForward GESTURE_Value(1,4)
+#define GestureBackwards GESTURE_Value(1,5)
+#define GestureCW GESTURE_Value(1,6)
+#define GestureACW GESTURE_Value(1,7)
 /* #define GestureNone GESTURE_Value(1,8) */
 
 #define InitialRegister (sizeof(RegisterArray)/sizeof(RegisterArray[0]))

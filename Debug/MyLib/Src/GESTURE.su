@@ -2,4 +2,4 @@ GESTURE.c:230:6:initializeRegisters	24	static
 GESTURE.c:245:6:GESTURE_Actions	24	static
 GESTURE.c:351:16:registerRead	32	static
 GESTURE.c:382:13:registerWrite	32	static
-GESTURE.c:404:9:gestureInit	24	static
+GESTURE.c:402:9:gestureInit	24	static
