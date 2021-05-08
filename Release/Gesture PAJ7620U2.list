@@ -21,29 +21,29 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, DATA
   8 .data         00000228  20000000  08004a08  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000494  20000228  08004c30  00020228  2**2
+  9 .bss          00000498  20000228  08004c30  00020228  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  200006bc  08004c30  000206bc  2**0
+ 10 ._user_heap_stack 00000600  200006c0  08004c30  000206c0  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00020228  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00017271  00000000  00000000  00020258  2**0
+ 12 .debug_info   00017289  00000000  00000000  00020258  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 000032ad  00000000  00000000  000374c9  2**0
+ 13 .debug_abbrev 000032ad  00000000  00000000  000374e1  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000b48  00000000  00000000  0003a776  2**0
+ 14 .debug_aranges 00000b48  00000000  00000000  0003a78e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 000014e0  00000000  00000000  0003b2be  2**0
+ 15 .debug_ranges 000014e0  00000000  00000000  0003b2d6  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_line   00010c9a  00000000  00000000  0003c79e  2**0
+ 16 .debug_line   00010c99  00000000  00000000  0003c7b6  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_str    000044ed  00000000  00000000  0004d438  2**0
+ 17 .debug_str    000044f6  00000000  00000000  0004d44f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .comment      00000053  00000000  00000000  00051925  2**0
+ 18 .comment      00000053  00000000  00000000  00051945  2**0
                   CONTENTS, READONLY
- 19 .debug_frame  00002ae0  00000000  00000000  00051978  2**2
+ 19 .debug_frame  00002adc  00000000  00000000  00051998  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_loc    0000b868  00000000  00000000  00054458  2**0
+ 20 .debug_loc    0000b849  00000000  00000000  00054474  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -508,10 +508,10 @@ void Error_Handler(void)
  80004cc:	48001800 	.word	0x48001800
  80004d0:	10110000 	.word	0x10110000
  80004d4:	48000800 	.word	0x48000800
- 80004d8:	20000320 	.word	0x20000320
+ 80004d8:	20000324 	.word	0x20000324
  80004dc:	40002800 	.word	0x40002800
- 80004e0:	2000038c 	.word	0x2000038c
- 80004e4:	200002d4 	.word	0x200002d4
+ 80004e0:	20000390 	.word	0x20000390
+ 80004e4:	200002d8 	.word	0x200002d8
  80004e8:	2000090e 	.word	0x2000090e
  80004ec:	20000250 	.word	0x20000250
  80004f0:	40004800 	.word	0x40004800
@@ -891,7 +891,7 @@ void USB_LP_CAN_RX0_IRQHandler(void)
  8000680:	4801      	ldr	r0, [pc, #4]	; (8000688 <USB_LP_CAN_RX0_IRQHandler+0x8>)
  8000682:	f000 bd6d 	b.w	8001160 <HAL_PCD_IRQHandler>
  8000686:	bf00      	nop
- 8000688:	2000038c 	.word	0x2000038c
+ 8000688:	20000390 	.word	0x20000390
 
 0800068c <_read>:
 	_kill(status, -1);
@@ -1104,7 +1104,7 @@ void SystemInit(void)
  800076c:	20000228 	.word	0x20000228
  8000770:	08004a08 	.word	0x08004a08
  8000774:	20000228 	.word	0x20000228
- 8000778:	200006bc 	.word	0x200006bc
+ 8000778:	200006c0 	.word	0x200006c0
 
 0800077c <ADC1_2_IRQHandler>:
  800077c:	e7fe      	b.n	800077c <ADC1_2_IRQHandler>
@@ -1203,7 +1203,7 @@ __weak void HAL_IncTick(void)
 }
  80007f8:	4770      	bx	lr
  80007fa:	bf00      	nop
- 80007fc:	20000678 	.word	0x20000678
+ 80007fc:	2000067c 	.word	0x2000067c
  8000800:	20000004 	.word	0x20000004
 
 08000804 <HAL_GetTick>:
@@ -1218,7 +1218,7 @@ __weak uint32_t HAL_GetTick(void)
 }
  8000808:	4770      	bx	lr
  800080a:	bf00      	nop
- 800080c:	20000678 	.word	0x20000678
+ 800080c:	2000067c 	.word	0x2000067c
 
 08000810 <HAL_Delay>:
   *         implementations  in user file.
@@ -7051,7 +7051,7 @@ uint32_t  USB_ReadInterrupts(USB_TypeDef *USBx)
 
 08002f6c <registerWrite>:
 	HAL_Delay(1000);
-	return result;
+	return 0;
 };
 
 static uint8_t registerWrite(uint8_t address, uint8_t cmd)
@@ -7062,62 +7062,59 @@ static uint8_t registerWrite(uint8_t address, uint8_t cmd)
 	tmp[1] = cmd;
 	char result = 1;
 
-	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, tmp, 2, 100);
+	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C, tmp, 2, 100);
  8002f6e:	2364      	movs	r3, #100	; 0x64
 	tmp[0] = address;
  8002f70:	f88d 000c 	strb.w	r0, [sp, #12]
 	tmp[1] = cmd;
  8002f74:	f88d 100d 	strb.w	r1, [sp, #13]
-	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, tmp, 2, 100);
+	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C, tmp, 2, 100);
  8002f78:	9300      	str	r3, [sp, #0]
  8002f7a:	aa03      	add	r2, sp, #12
  8002f7c:	4812      	ldr	r0, [pc, #72]	; (8002fc8 <registerWrite+0x5c>)
  8002f7e:	2302      	movs	r3, #2
- 8002f80:	21e6      	movs	r1, #230	; 0xe6
+ 8002f80:	2173      	movs	r1, #115	; 0x73
  8002f82:	f7fd ff01 	bl	8000d88 <HAL_I2C_Master_Transmit>
 
-	if (result != 0)
- 8002f86:	4604      	mov	r4, r0
+	if (result != HAL_OK)
+ 8002f86:	4602      	mov	r2, r0
+ 8002f88:	b1c0      	cbz	r0, 8002fbc <registerWrite+0x50>
 	{
 		sprintf((char*)ref, "\r\n Transmission Error %d", result);
- 8002f88:	4602      	mov	r2, r0
-	if (result != 0)
- 8002f8a:	b1b8      	cbz	r0, 8002fbc <registerWrite+0x50>
-		sprintf((char*)ref, "\r\n Transmission Error %d", result);
- 8002f8c:	490f      	ldr	r1, [pc, #60]	; (8002fcc <registerWrite+0x60>)
- 8002f8e:	4810      	ldr	r0, [pc, #64]	; (8002fd0 <registerWrite+0x64>)
- 8002f90:	f000 fa9c 	bl	80034cc <siprintf>
+ 8002f8a:	4910      	ldr	r1, [pc, #64]	; (8002fcc <registerWrite+0x60>)
+ 8002f8c:	4810      	ldr	r0, [pc, #64]	; (8002fd0 <registerWrite+0x64>)
+ 8002f8e:	f000 fa9d 	bl	80034cc <siprintf>
 		printf("Transmission Error \n");
- 8002f94:	480f      	ldr	r0, [pc, #60]	; (8002fd4 <registerWrite+0x68>)
- 8002f96:	f000 fa91 	bl	80034bc <puts>
+ 8002f92:	4810      	ldr	r0, [pc, #64]	; (8002fd4 <registerWrite+0x68>)
+ 8002f94:	f000 fa92 	bl	80034bc <puts>
 	}else{
 		sprintf((char*)ref, "\r\n Transmission Successful %d", result);
 	}
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
- 8002f9a:	480d      	ldr	r0, [pc, #52]	; (8002fd0 <registerWrite+0x64>)
- 8002f9c:	f7fd f920 	bl	80001e0 <strlen>
- 8002fa0:	490b      	ldr	r1, [pc, #44]	; (8002fd0 <registerWrite+0x64>)
- 8002fa2:	b282      	uxth	r2, r0
- 8002fa4:	f04f 33ff 	mov.w	r3, #4294967295
- 8002fa8:	480b      	ldr	r0, [pc, #44]	; (8002fd8 <registerWrite+0x6c>)
- 8002faa:	f7ff fbe7 	bl	800277c <HAL_UART_Transmit>
+ 8002f98:	480d      	ldr	r0, [pc, #52]	; (8002fd0 <registerWrite+0x64>)
+ 8002f9a:	f7fd f921 	bl	80001e0 <strlen>
+ 8002f9e:	490c      	ldr	r1, [pc, #48]	; (8002fd0 <registerWrite+0x64>)
+ 8002fa0:	b282      	uxth	r2, r0
+ 8002fa2:	f04f 33ff 	mov.w	r3, #4294967295
+ 8002fa6:	480c      	ldr	r0, [pc, #48]	; (8002fd8 <registerWrite+0x6c>)
+ 8002fa8:	f7ff fbe8 	bl	800277c <HAL_UART_Transmit>
 	HAL_Delay(1000);
- 8002fae:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
- 8002fb2:	f7fd fc2d 	bl	8000810 <HAL_Delay>
-	return result;
+ 8002fac:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+ 8002fb0:	f7fd fc2e 	bl	8000810 <HAL_Delay>
+	return 0;
 };
- 8002fb6:	4620      	mov	r0, r4
- 8002fb8:	b004      	add	sp, #16
- 8002fba:	bd10      	pop	{r4, pc}
+ 8002fb4:	2000      	movs	r0, #0
+ 8002fb6:	b005      	add	sp, #20
+ 8002fb8:	f85d fb04 	ldr.w	pc, [sp], #4
 		sprintf((char*)ref, "\r\n Transmission Successful %d", result);
  8002fbc:	4907      	ldr	r1, [pc, #28]	; (8002fdc <registerWrite+0x70>)
  8002fbe:	4804      	ldr	r0, [pc, #16]	; (8002fd0 <registerWrite+0x64>)
  8002fc0:	f000 fa84 	bl	80034cc <siprintf>
- 8002fc4:	e7e9      	b.n	8002f9a <registerWrite+0x2e>
+ 8002fc4:	e7e8      	b.n	8002f98 <registerWrite+0x2c>
  8002fc6:	bf00      	nop
- 8002fc8:	20000340 	.word	0x20000340
+ 8002fc8:	20000344 	.word	0x20000344
  8002fcc:	0800474f 	.word	0x0800474f
- 8002fd0:	2000067c 	.word	0x2000067c
+ 8002fd0:	20000680 	.word	0x20000680
  8002fd4:	08004768 	.word	0x08004768
  8002fd8:	20000250 	.word	0x20000250
  8002fdc:	0800477c 	.word	0x0800477c
@@ -7125,46 +7122,45 @@ static uint8_t registerWrite(uint8_t address, uint8_t cmd)
 08002fe0 <registerRead.constprop.0>:
 static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
  8002fe0:	b51f      	push	{r0, r1, r2, r3, r4, lr}
-	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, tmp, 1, 100);
- 8002fe2:	2364      	movs	r3, #100	; 0x64
+	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C, tmp, 1, 100);
+ 8002fe2:	2264      	movs	r2, #100	; 0x64
 	tmp[0] = address;
  8002fe4:	f88d 000c 	strb.w	r0, [sp, #12]
-	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, tmp, 1, 100);
- 8002fe8:	9300      	str	r3, [sp, #0]
- 8002fea:	aa03      	add	r2, sp, #12
+	tmp[1] = qty;
+ 8002fe8:	2301      	movs	r3, #1
+	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C, tmp, 1, 100);
+ 8002fea:	9200      	str	r2, [sp, #0]
  8002fec:	481e      	ldr	r0, [pc, #120]	; (8003068 <registerRead.constprop.0+0x88>)
+	tmp[1] = qty;
+ 8002fee:	f88d 300d 	strb.w	r3, [sp, #13]
+	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C, tmp, 1, 100);
+ 8002ff2:	aa03      	add	r2, sp, #12
 static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
- 8002fee:	460c      	mov	r4, r1
-	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, tmp, 1, 100);
- 8002ff0:	2301      	movs	r3, #1
- 8002ff2:	21e6      	movs	r1, #230	; 0xe6
- 8002ff4:	f7fd fec8 	bl	8000d88 <HAL_I2C_Master_Transmit>
-	if (result != 0)
- 8002ff8:	4602      	mov	r2, r0
- 8002ffa:	b350      	cbz	r0, 8003052 <registerRead.constprop.0+0x72>
+ 8002ff4:	460c      	mov	r4, r1
+	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C, tmp, 1, 100);
+ 8002ff6:	2173      	movs	r1, #115	; 0x73
+ 8002ff8:	f7fd fec6 	bl	8000d88 <HAL_I2C_Master_Transmit>
+	if (result != HAL_OK)
+ 8002ffc:	4602      	mov	r2, r0
+ 8002ffe:	b340      	cbz	r0, 8003052 <registerRead.constprop.0+0x72>
 		sprintf((char*)ref, "\r\n Error TX %d", result);
- 8002ffc:	491b      	ldr	r1, [pc, #108]	; (800306c <registerRead.constprop.0+0x8c>)
- 8002ffe:	481c      	ldr	r0, [pc, #112]	; (8003070 <registerRead.constprop.0+0x90>)
- 8003000:	f000 fa64 	bl	80034cc <siprintf>
+ 8003000:	491a      	ldr	r1, [pc, #104]	; (800306c <registerRead.constprop.0+0x8c>)
+ 8003002:	481b      	ldr	r0, [pc, #108]	; (8003070 <registerRead.constprop.0+0x90>)
+ 8003004:	f000 fa62 	bl	80034cc <siprintf>
 		printf("Error TX \n");
- 8003004:	481b      	ldr	r0, [pc, #108]	; (8003074 <registerRead.constprop.0+0x94>)
- 8003006:	f000 fa59 	bl	80034bc <puts>
-	result = HAL_I2C_Master_Receive(&HandleI2C, GESTURE_ADDRESS_I2C << 1, data, qty, 100);
- 800300a:	2364      	movs	r3, #100	; 0x64
- 800300c:	4622      	mov	r2, r4
- 800300e:	9300      	str	r3, [sp, #0]
- 8003010:	4815      	ldr	r0, [pc, #84]	; (8003068 <registerRead.constprop.0+0x88>)
- 8003012:	2301      	movs	r3, #1
- 8003014:	21e6      	movs	r1, #230	; 0xe6
- 8003016:	f7fd ff4d 	bl	8000eb4 <HAL_I2C_Master_Receive>
-	if (result != 2){
- 800301a:	2802      	cmp	r0, #2
-	result = HAL_I2C_Master_Receive(&HandleI2C, GESTURE_ADDRESS_I2C << 1, data, qty, 100);
- 800301c:	4604      	mov	r4, r0
-		sprintf((char*)ref, "\r\n Error RX %d", result);
+ 8003008:	481a      	ldr	r0, [pc, #104]	; (8003074 <registerRead.constprop.0+0x94>)
+ 800300a:	f000 fa57 	bl	80034bc <puts>
+	result = HAL_I2C_Master_Receive(&HandleI2C, GESTURE_ADDRESS_I2C, data, qty, 100);
+ 800300e:	2364      	movs	r3, #100	; 0x64
+ 8003010:	9300      	str	r3, [sp, #0]
+ 8003012:	4622      	mov	r2, r4
+ 8003014:	4814      	ldr	r0, [pc, #80]	; (8003068 <registerRead.constprop.0+0x88>)
+ 8003016:	2301      	movs	r3, #1
+ 8003018:	2173      	movs	r1, #115	; 0x73
+ 800301a:	f7fd ff4b 	bl	8000eb4 <HAL_I2C_Master_Receive>
+	if (result != HAL_OK){
  800301e:	4602      	mov	r2, r0
-	if (result != 2){
- 8003020:	d01c      	beq.n	800305c <registerRead.constprop.0+0x7c>
+ 8003020:	b1e0      	cbz	r0, 800305c <registerRead.constprop.0+0x7c>
 		sprintf((char*)ref, "\r\n Error RX %d", result);
  8003022:	4915      	ldr	r1, [pc, #84]	; (8003078 <registerRead.constprop.0+0x98>)
  8003024:	4812      	ldr	r0, [pc, #72]	; (8003070 <registerRead.constprop.0+0x90>)
@@ -7184,23 +7180,23 @@ static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
  8003044:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
  8003048:	f7fd fbe2 	bl	8000810 <HAL_Delay>
 };
- 800304c:	4620      	mov	r0, r4
+ 800304c:	2000      	movs	r0, #0
  800304e:	b004      	add	sp, #16
  8003050:	bd10      	pop	{r4, pc}
 		sprintf((char*)ref, "\r\n Transmitted %d", result);
  8003052:	490c      	ldr	r1, [pc, #48]	; (8003084 <registerRead.constprop.0+0xa4>)
  8003054:	4806      	ldr	r0, [pc, #24]	; (8003070 <registerRead.constprop.0+0x90>)
  8003056:	f000 fa39 	bl	80034cc <siprintf>
- 800305a:	e7d6      	b.n	800300a <registerRead.constprop.0+0x2a>
+ 800305a:	e7d8      	b.n	800300e <registerRead.constprop.0+0x2e>
 		sprintf((char*)ref, "\r\n Received %d", result);
  800305c:	490a      	ldr	r1, [pc, #40]	; (8003088 <registerRead.constprop.0+0xa8>)
  800305e:	4804      	ldr	r0, [pc, #16]	; (8003070 <registerRead.constprop.0+0x90>)
  8003060:	f000 fa34 	bl	80034cc <siprintf>
  8003064:	e7e4      	b.n	8003030 <registerRead.constprop.0+0x50>
  8003066:	bf00      	nop
- 8003068:	20000340 	.word	0x20000340
+ 8003068:	20000344 	.word	0x20000344
  800306c:	0800479a 	.word	0x0800479a
- 8003070:	2000067c 	.word	0x2000067c
+ 8003070:	20000680 	.word	0x20000680
  8003074:	080047a9 	.word	0x080047a9
  8003078:	080047c5 	.word	0x080047c5
  800307c:	080047d4 	.word	0x080047d4
@@ -7392,7 +7388,7 @@ static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
 			printf("Backwards Gesture \n");
  80031f0:	4815      	ldr	r0, [pc, #84]	; (8003248 <GESTURE_Actions+0x1bc>)
  80031f2:	e795      	b.n	8003120 <GESTURE_Actions+0x94>
- 80031f4:	2000067c 	.word	0x2000067c
+ 80031f4:	20000680 	.word	0x20000680
  80031f8:	20000250 	.word	0x20000250
  80031fc:	080047ed 	.word	0x080047ed
  8003200:	080047fe 	.word	0x080047fe
@@ -7511,7 +7507,7 @@ uint8_t gestureInit(void)
  80032d8:	b002      	add	sp, #8
  80032da:	bd70      	pop	{r4, r5, r6, pc}
  80032dc:	08004929 	.word	0x08004929
- 80032e0:	2000067c 	.word	0x2000067c
+ 80032e0:	20000680 	.word	0x20000680
  80032e4:	2000000c 	.word	0x2000000c
  80032e8:	20000250 	.word	0x20000250
 
@@ -7552,7 +7548,7 @@ void initializeRegisters(void){
  8003330:	e7e7      	b.n	8003302 <initializeRegisters+0x16>
  8003332:	bf00      	nop
  8003334:	08004934 	.word	0x08004934
- 8003338:	2000067c 	.word	0x2000067c
+ 8003338:	20000680 	.word	0x20000680
  800333c:	08004936 	.word	0x08004936
  8003340:	20000250 	.word	0x20000250
  8003344:	08004949 	.word	0x08004949
@@ -8179,25 +8175,25 @@ void initializeRegisters(void){
  80038a0:	4801      	ldr	r0, [pc, #4]	; (80038a8 <__sfp_lock_acquire+0x8>)
  80038a2:	f000 b8b3 	b.w	8003a0c <__retarget_lock_acquire_recursive>
  80038a6:	bf00      	nop
- 80038a8:	200006b6 	.word	0x200006b6
+ 80038a8:	200006ba 	.word	0x200006ba
 
 080038ac <__sfp_lock_release>:
  80038ac:	4801      	ldr	r0, [pc, #4]	; (80038b4 <__sfp_lock_release+0x8>)
  80038ae:	f000 b8ae 	b.w	8003a0e <__retarget_lock_release_recursive>
  80038b2:	bf00      	nop
- 80038b4:	200006b6 	.word	0x200006b6
+ 80038b4:	200006ba 	.word	0x200006ba
 
 080038b8 <__sinit_lock_acquire>:
  80038b8:	4801      	ldr	r0, [pc, #4]	; (80038c0 <__sinit_lock_acquire+0x8>)
  80038ba:	f000 b8a7 	b.w	8003a0c <__retarget_lock_acquire_recursive>
  80038be:	bf00      	nop
- 80038c0:	200006b1 	.word	0x200006b1
+ 80038c0:	200006b5 	.word	0x200006b5
 
 080038c4 <__sinit_lock_release>:
  80038c4:	4801      	ldr	r0, [pc, #4]	; (80038cc <__sinit_lock_release+0x8>)
  80038c6:	f000 b8a2 	b.w	8003a0e <__retarget_lock_release_recursive>
  80038ca:	bf00      	nop
- 80038cc:	200006b1 	.word	0x200006b1
+ 80038cc:	200006b5 	.word	0x200006b5
 
 080038d0 <__sinit>:
  80038d0:	b510      	push	{r4, lr}
@@ -9505,7 +9501,7 @@ void initializeRegisters(void){
  80044d6:	b103      	cbz	r3, 80044da <_sbrk_r+0x1a>
  80044d8:	6023      	str	r3, [r4, #0]
  80044da:	bd38      	pop	{r3, r4, r5, pc}
- 80044dc:	200006b8 	.word	0x200006b8
+ 80044dc:	200006bc 	.word	0x200006bc
 
 080044e0 <__sread>:
  80044e0:	b510      	push	{r4, lr}
@@ -9583,7 +9579,7 @@ void initializeRegisters(void){
  8004582:	b103      	cbz	r3, 8004586 <_write_r+0x1e>
  8004584:	6023      	str	r3, [r4, #0]
  8004586:	bd38      	pop	{r3, r4, r5, pc}
- 8004588:	200006b8 	.word	0x200006b8
+ 8004588:	200006bc 	.word	0x200006bc
 
 0800458c <_close_r>:
  800458c:	b538      	push	{r3, r4, r5, lr}
@@ -9599,7 +9595,7 @@ void initializeRegisters(void){
  80045a2:	b103      	cbz	r3, 80045a6 <_close_r+0x1a>
  80045a4:	6023      	str	r3, [r4, #0]
  80045a6:	bd38      	pop	{r3, r4, r5, pc}
- 80045a8:	200006b8 	.word	0x200006b8
+ 80045a8:	200006bc 	.word	0x200006bc
 
 080045ac <_fstat_r>:
  80045ac:	b538      	push	{r3, r4, r5, lr}
@@ -9617,7 +9613,7 @@ void initializeRegisters(void){
  80045c6:	6023      	str	r3, [r4, #0]
  80045c8:	bd38      	pop	{r3, r4, r5, pc}
  80045ca:	bf00      	nop
- 80045cc:	200006b8 	.word	0x200006b8
+ 80045cc:	200006bc 	.word	0x200006bc
 
 080045d0 <_isatty_r>:
  80045d0:	b538      	push	{r3, r4, r5, lr}
@@ -9633,7 +9629,7 @@ void initializeRegisters(void){
  80045e6:	b103      	cbz	r3, 80045ea <_isatty_r+0x1a>
  80045e8:	6023      	str	r3, [r4, #0]
  80045ea:	bd38      	pop	{r3, r4, r5, pc}
- 80045ec:	200006b8 	.word	0x200006b8
+ 80045ec:	200006bc 	.word	0x200006bc
 
 080045f0 <_lseek_r>:
  80045f0:	b538      	push	{r3, r4, r5, lr}
@@ -9651,7 +9647,7 @@ void initializeRegisters(void){
  800460a:	b103      	cbz	r3, 800460e <_lseek_r+0x1e>
  800460c:	6023      	str	r3, [r4, #0]
  800460e:	bd38      	pop	{r3, r4, r5, pc}
- 8004610:	200006b8 	.word	0x200006b8
+ 8004610:	200006bc 	.word	0x200006bc
 
 08004614 <memcpy>:
  8004614:	440a      	add	r2, r1
@@ -9693,13 +9689,13 @@ void initializeRegisters(void){
  8004664:	4801      	ldr	r0, [pc, #4]	; (800466c <__malloc_lock+0x8>)
  8004666:	f7ff b9d1 	b.w	8003a0c <__retarget_lock_acquire_recursive>
  800466a:	bf00      	nop
- 800466c:	200006b2 	.word	0x200006b2
+ 800466c:	200006b6 	.word	0x200006b6
 
 08004670 <__malloc_unlock>:
  8004670:	4801      	ldr	r0, [pc, #4]	; (8004678 <__malloc_unlock+0x8>)
  8004672:	f7ff b9cc 	b.w	8003a0e <__retarget_lock_release_recursive>
  8004676:	bf00      	nop
- 8004678:	200006b2 	.word	0x200006b2
+ 8004678:	200006b6 	.word	0x200006b6
 
 0800467c <_realloc_r>:
  800467c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
@@ -9750,7 +9746,7 @@ void initializeRegisters(void){
  80046e2:	b103      	cbz	r3, 80046e6 <_read_r+0x1e>
  80046e4:	6023      	str	r3, [r4, #0]
  80046e6:	bd38      	pop	{r3, r4, r5, pc}
- 80046e8:	200006b8 	.word	0x200006b8
+ 80046e8:	200006bc 	.word	0x200006bc
 
 080046ec <_malloc_usable_size_r>:
  80046ec:	f851 3c04 	ldr.w	r3, [r1, #-4]
