@@ -11,6 +11,7 @@
 
 I2C_HandleTypeDef HandleI2C; /* HandleI2C pointer for I2C Type Def */
 UART_HandleTypeDef huart3; /* huart3 pointer */
+HAL_StatusTypeDef statatus; /* Variable for status type for hal functions */
 
 
 void GESTURE_Actions(void); /* Sets action flags for gestures */
@@ -18,7 +19,7 @@ void GESTURE_Actions(void); /* Sets action flags for gestures */
 void initializeRegisters(void); /* Initializes sensors registers */
 
 uint8_t gestureInit(void); /* Initialize gesture */
-static uint8_t registerWrite(uint8_t address, uint8_t cmd); /* Write to addressed register */
+static void registerWrite(uint8_t address, uint8_t cmd); /* Write to addressed register */
 /* Registers address
  * CMD functions data */
 static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[]); /* Read data from addressed register */

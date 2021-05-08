@@ -352,11 +352,12 @@ static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
 {
 	uint8_t tmp[3];
 	tmp[0] = address;
+	tmp[1] = qty;
 	char result = 1;
 
-	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, tmp, 1, 100);
+	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C, tmp, 1, 100);
 
-	if (result != 0)
+	if (result != HAL_OK)
 	{
 		sprintf((char*)ref, "\r\n Error TX %d", result);
 		printf("Error TX \n");
@@ -365,9 +366,9 @@ static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
 	}
 
 	/* result = 0; */
-	result = HAL_I2C_Master_Receive(&HandleI2C, GESTURE_ADDRESS_I2C << 1, data, qty, 100);
+	result = HAL_I2C_Master_Receive(&HandleI2C, GESTURE_ADDRESS_I2C, data, qty, 100);
 
-	if (result != 0){
+	if (result != HAL_OK){
 		sprintf((char*)ref, "\r\n Error RX %d", result);
 		printf("Error RX \n");
 	}else{
@@ -378,16 +379,16 @@ static uint8_t registerRead(uint8_t address, uint8_t qty, uint8_t data[])
 	return result;
 };
 
-static uint8_t registerWrite(uint8_t address, uint8_t cmd)
+static void registerWrite(uint8_t address, uint8_t cmd)
 {
 	uint8_t tmp[3];
 	tmp[0] = address;
 	tmp[1] = cmd;
 	char result = 1;
 
-	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, tmp, 2, 100);
+	result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C, tmp, 2, 100);
 
-	if (result != 0)
+	if (result != HAL_OK)
 	{
 		sprintf((char*)ref, "\r\n Transmission Error %d", result);
 		printf("Transmission Error \n");
@@ -396,7 +397,6 @@ static uint8_t registerWrite(uint8_t address, uint8_t cmd)
 	}
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
 	HAL_Delay(1000);
-	return result;
 };
 
 
