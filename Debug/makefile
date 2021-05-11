@@ -51,6 +51,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 Gesture\ PAJ7620U2.list \
 
+OBJCOPY_HEX += \
+Gesture\ PAJ7620U2.hex \
+
 OBJCOPY_BIN += \
 Gesture\ PAJ7620U2.bin \
 
@@ -77,6 +80,11 @@ Gesture\ PAJ7620U2.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DE
 	@echo 'Finished building: $@'
 	@echo ' '
 
+Gesture\ PAJ7620U2.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "Gesture PAJ7620U2.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 Gesture\ PAJ7620U2.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "Gesture PAJ7620U2.bin"
 	@echo 'Finished building: $@'
@@ -87,7 +95,7 @@ clean:
 	-$(RM) *
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX) $(OBJCOPY_BIN)
 
 fail-specified-linker-script-missing:
 	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'

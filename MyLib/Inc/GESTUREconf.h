@@ -68,7 +68,7 @@
 #define GestureACW GESTURE_Value(1,7)
 /* #define GestureNone GESTURE_Value(1,8) */
 
-#define InitialRegister (sizeof(RegisterArray)/sizeof(RegisterArray[0]))
+#define initialRegister (sizeof(RegisterArray)/sizeof(RegisterArray[0]))
 
 
 

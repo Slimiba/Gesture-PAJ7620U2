@@ -113,8 +113,8 @@ unsigned char RegisterArray[][2] = {
 		{0xE2, 0x41},
 		{0xE3, 0xD6},
 		{0xE4, 0x00},
-		{0xE5, 0x0C},
-		{0xE6, 0x0A},
+		{0xE5, 0x8C},
+		{0xE6, 0x4A},
 		{0xE7, 0x00},
 		{0xE8, 0x00},
 		{0xE9, 0x00},
@@ -356,7 +356,7 @@ static uint8_t registerRead(uint8_t addr, uint8_t qty, uint8_t data[])
 
 	uint8_t value = 0;
 	HAL_StatusTypeDef result = HAL_OK;
-	result = HAL_I2C_Mem_Read(&HandleI2C, GESTURE_ADDRESS_I2C << 1, addr, I2C_MEMADD_SIZE_8BIT, &value, 1, 10);
+	result = HAL_I2C_Mem_Write(&HandleI2C, GESTURE_ADDRESS_I2C << 1, addr, I2C_MEMADD_SIZE_8BIT, &value, 1, 10);
 
 	/* result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, &addr, 1, 10); */
 
@@ -368,11 +368,11 @@ static uint8_t registerRead(uint8_t addr, uint8_t qty, uint8_t data[])
 		sprintf((char*)ref, "\r\n Transmitted %d", result);
 	}
 
-	result = 1;
-	/* result = HAL_I2C_Master_Receive(&HandleI2C, GESTURE_ADDRESS_I2C << 1, data, qty, 10); */
-	result = HAL_I2C_Mem_Write(&HandleI2C, GESTURE_ADDRESS_I2C << 1, addr, I2C_MEMADD_SIZE_8BIT, data, qty, 10);
 
-	if (result != HAL_OK){
+	/* result = HAL_I2C_Master_Receive(&HandleI2C, GESTURE_ADDRESS_I2C << 1, data, qty, 10); */
+	/* result = HAL_I2C_Mem_Read(&HandleI2C, GESTURE_ADDRESS_I2C << 1, addr, I2C_MEMADD_SIZE_8BIT, data, qty, 10); */
+
+	if (HAL_I2C_Mem_Read(&HandleI2C, GESTURE_ADDRESS_I2C << 1, addr, I2C_MEMADD_SIZE_8BIT, data, qty, 10) != HAL_OK){
 		sprintf((char*)ref, "\r\n Error RX %d", result);
 		printf("Error RX \n");
 	}else{
@@ -380,7 +380,7 @@ static uint8_t registerRead(uint8_t addr, uint8_t qty, uint8_t data[])
 	}
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
 	HAL_Delay(1000);
-	return value;
+	return result;
 };
 
 static void registerWrite(uint8_t addr, uint8_t cmd)
@@ -391,9 +391,9 @@ static void registerWrite(uint8_t addr, uint8_t cmd)
 	/* result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, &addr, 2, 10); */
 
 	HAL_StatusTypeDef result = HAL_OK;
-	result = HAL_I2C_Mem_Write(&HandleI2C, GESTURE_ADDRESS_I2C << 1, (uint16_t)addr, I2C_MEMADD_SIZE_8BIT, &cmd, 2, 10);
+	/* result = HAL_I2C_Mem_Write(&HandleI2C, GESTURE_ADDRESS_I2C << 1, (uint16_t)addr, I2C_MEMADD_SIZE_8BIT, &cmd, 2, 10); */
 
-	if (result != HAL_OK)
+	if (HAL_I2C_Mem_Write(&HandleI2C, GESTURE_ADDRESS_I2C << 1, (uint16_t)addr, I2C_MEMADD_SIZE_8BIT, &cmd, 2, 10) != HAL_OK)
 	{
 		sprintf((char*)ref, "\r\n Transmission Error %d", result);
 		printf("Transmission Error \n");
@@ -412,11 +412,11 @@ uint8_t gestureInit(void)
 	uint8_t data1 = 1;
 	int result = 0;
 
-	registerWrite(GESTURE_REG_BANK_SEL, GESTURE_BANK0);
-	registerWrite(GESTURE_REG_BANK_SEL, GESTURE_BANK0);
-
 	registerRead(0,1, &data0);
 	registerRead(1,1, &data1);
+
+	registerWrite(GESTURE_REG_BANK_SEL, GESTURE_BANK0);
+	registerWrite(GESTURE_REG_BANK_SEL, GESTURE_BANK0);
 
 	if ((data0 != 0x20) || (data1 != 0x76)){
 		result = 1;
@@ -427,10 +427,16 @@ uint8_t gestureInit(void)
 		printf("\n\r Wake Up");
 	}
 
-	for(int i = 0; i < InitialRegister; i++){
+	if(HAL_I2C_IsDeviceReady(&HandleI2C, GESTURE_ADDRESS_I2C << 1, 5, 100) != HAL_Ok){
+		strcpy((char*)ref, "\n\r Error");
+	}else{
+		strcpy((char*)ref, "\n\r Device Is Ready!");
+	}
+
+	for(int i = 0; i < initialRegister; i++){
 		registerWrite(RegisterArray[i][0], RegisterArray[i][1]);
 	}
-	strcpy((char*)ref, "\n\r Register Initialize Finished");
+
 	registerWrite(GESTURE_REG_BANK_SEL, GESTURE_BANK0);
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
 	HAL_Delay(1000);

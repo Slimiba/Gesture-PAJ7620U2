@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00020228  2**0
                   CONTENTS, READONLY
- 12 .debug_info   000172a3  00000000  00000000  00020258  2**0
+ 12 .debug_info   000172a7  00000000  00000000  00020258  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 0000328b  00000000  00000000  000374fb  2**0
+ 13 .debug_abbrev 0000329c  00000000  00000000  000374ff  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000b48  00000000  00000000  0003a786  2**0
+ 14 .debug_aranges 00000b48  00000000  00000000  0003a79b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 000014e0  00000000  00000000  0003b2ce  2**0
+ 15 .debug_ranges 000014e0  00000000  00000000  0003b2e3  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_line   00010c92  00000000  00000000  0003c7ae  2**0
+ 16 .debug_line   00010c93  00000000  00000000  0003c7c3  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_str    000044ed  00000000  00000000  0004d440  2**0
+ 17 .debug_str    000044ed  00000000  00000000  0004d456  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .comment      00000053  00000000  00000000  0005192d  2**0
+ 18 .comment      00000053  00000000  00000000  00051943  2**0
                   CONTENTS, READONLY
- 19 .debug_frame  00002ae0  00000000  00000000  00051980  2**2
+ 19 .debug_frame  00002ae0  00000000  00000000  00051998  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_loc    0000b83a  00000000  00000000  00054460  2**0
+ 20 .debug_loc    0000b7fc  00000000  00000000  00054478  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -7165,68 +7165,66 @@ uint32_t  USB_ReadInterrupts(USB_TypeDef *USBx)
 
 08003050 <registerWrite>:
 	HAL_Delay(1000);
-	return value;
+	return result;
 };
 
 static void registerWrite(uint8_t addr, uint8_t cmd)
 {
  8003050:	b57f      	push	{r0, r1, r2, r3, r4, r5, r6, lr}
-	/* uint8_t tmp[3] = { addr, cmd }; */
-	/* uint8_t result = 0; */
-
 	/* result = HAL_I2C_Master_Transmit(&HandleI2C, GESTURE_ADDRESS_I2C << 1, &addr, 2, 10); */
+
 	HAL_StatusTypeDef result = HAL_OK;
-	result = HAL_I2C_Mem_Write(&HandleI2C, GESTURE_ADDRESS_I2C << 1, (uint16_t)addr, I2C_MEMADD_SIZE_8BIT, &cmd, 2, 10);
+	/* result = HAL_I2C_Mem_Write(&HandleI2C, GESTURE_ADDRESS_I2C << 1, (uint16_t)addr, I2C_MEMADD_SIZE_8BIT, &cmd, 2, 10); */
+
+	if (HAL_I2C_Mem_Write(&HandleI2C, GESTURE_ADDRESS_I2C << 1, (uint16_t)addr, I2C_MEMADD_SIZE_8BIT, &cmd, 2, 10) != HAL_OK)
  8003052:	2302      	movs	r3, #2
 {
  8003054:	f88d 1017 	strb.w	r1, [sp, #23]
-	result = HAL_I2C_Mem_Write(&HandleI2C, GESTURE_ADDRESS_I2C << 1, (uint16_t)addr, I2C_MEMADD_SIZE_8BIT, &cmd, 2, 10);
+	if (HAL_I2C_Mem_Write(&HandleI2C, GESTURE_ADDRESS_I2C << 1, (uint16_t)addr, I2C_MEMADD_SIZE_8BIT, &cmd, 2, 10) != HAL_OK)
  8003058:	210a      	movs	r1, #10
  800305a:	e9cd 3101 	strd	r3, r1, [sp, #4]
  800305e:	f10d 0317 	add.w	r3, sp, #23
 {
  8003062:	4602      	mov	r2, r0
-	result = HAL_I2C_Mem_Write(&HandleI2C, GESTURE_ADDRESS_I2C << 1, (uint16_t)addr, I2C_MEMADD_SIZE_8BIT, &cmd, 2, 10);
+	if (HAL_I2C_Mem_Write(&HandleI2C, GESTURE_ADDRESS_I2C << 1, (uint16_t)addr, I2C_MEMADD_SIZE_8BIT, &cmd, 2, 10) != HAL_OK)
  8003064:	9300      	str	r3, [sp, #0]
  8003066:	4812      	ldr	r0, [pc, #72]	; (80030b0 <registerWrite+0x60>)
  8003068:	2301      	movs	r3, #1
  800306a:	21e6      	movs	r1, #230	; 0xe6
  800306c:	f7fd feb9 	bl	8000de2 <HAL_I2C_Mem_Write>
-	if (result != HAL_OK)
  8003070:	4602      	mov	r2, r0
- 8003072:	b1b8      	cbz	r0, 80030a4 <registerWrite+0x54>
+ 8003072:	b1c0      	cbz	r0, 80030a6 <registerWrite+0x56>
 	{
 		sprintf((char*)ref, "\r\n Transmission Error %d", result);
  8003074:	490f      	ldr	r1, [pc, #60]	; (80030b4 <registerWrite+0x64>)
  8003076:	4810      	ldr	r0, [pc, #64]	; (80030b8 <registerWrite+0x68>)
- 8003078:	f000 faaa 	bl	80035d0 <siprintf>
+ 8003078:	2200      	movs	r2, #0
+ 800307a:	f000 faa9 	bl	80035d0 <siprintf>
 		printf("Transmission Error \n");
- 800307c:	480f      	ldr	r0, [pc, #60]	; (80030bc <registerWrite+0x6c>)
- 800307e:	f000 fa9f 	bl	80035c0 <puts>
+ 800307e:	480f      	ldr	r0, [pc, #60]	; (80030bc <registerWrite+0x6c>)
+ 8003080:	f000 fa9e 	bl	80035c0 <puts>
 	}else{
 		sprintf((char*)ref, "\r\n Transmission Successful %d", result);
 	}
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
- 8003082:	480d      	ldr	r0, [pc, #52]	; (80030b8 <registerWrite+0x68>)
- 8003084:	f7fd f8ac 	bl	80001e0 <strlen>
- 8003088:	490b      	ldr	r1, [pc, #44]	; (80030b8 <registerWrite+0x68>)
- 800308a:	b282      	uxth	r2, r0
- 800308c:	f04f 33ff 	mov.w	r3, #4294967295
- 8003090:	480b      	ldr	r0, [pc, #44]	; (80030c0 <registerWrite+0x70>)
- 8003092:	f7ff fbe5 	bl	8002860 <HAL_UART_Transmit>
+ 8003084:	480c      	ldr	r0, [pc, #48]	; (80030b8 <registerWrite+0x68>)
+ 8003086:	f7fd f8ab 	bl	80001e0 <strlen>
+ 800308a:	490b      	ldr	r1, [pc, #44]	; (80030b8 <registerWrite+0x68>)
+ 800308c:	b282      	uxth	r2, r0
+ 800308e:	f04f 33ff 	mov.w	r3, #4294967295
+ 8003092:	480b      	ldr	r0, [pc, #44]	; (80030c0 <registerWrite+0x70>)
+ 8003094:	f7ff fbe4 	bl	8002860 <HAL_UART_Transmit>
 	HAL_Delay(1000);
- 8003096:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
- 800309a:	f7fd fbb9 	bl	8000810 <HAL_Delay>
-	return result;
+ 8003098:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+ 800309c:	f7fd fbb8 	bl	8000810 <HAL_Delay>
 };
- 800309e:	b007      	add	sp, #28
- 80030a0:	f85d fb04 	ldr.w	pc, [sp], #4
+ 80030a0:	b007      	add	sp, #28
+ 80030a2:	f85d fb04 	ldr.w	pc, [sp], #4
 		sprintf((char*)ref, "\r\n Transmission Successful %d", result);
- 80030a4:	4907      	ldr	r1, [pc, #28]	; (80030c4 <registerWrite+0x74>)
- 80030a6:	4804      	ldr	r0, [pc, #16]	; (80030b8 <registerWrite+0x68>)
- 80030a8:	f000 fa92 	bl	80035d0 <siprintf>
- 80030ac:	e7e9      	b.n	8003082 <registerWrite+0x32>
- 80030ae:	bf00      	nop
+ 80030a6:	4907      	ldr	r1, [pc, #28]	; (80030c4 <registerWrite+0x74>)
+ 80030a8:	4803      	ldr	r0, [pc, #12]	; (80030b8 <registerWrite+0x68>)
+ 80030aa:	f000 fa91 	bl	80035d0 <siprintf>
+ 80030ae:	e7e9      	b.n	8003084 <registerWrite+0x34>
  80030b0:	20000340 	.word	0x20000340
  80030b4:	08004853 	.word	0x08004853
  80030b8:	20000680 	.word	0x20000680
@@ -7241,12 +7239,12 @@ static uint8_t registerRead(uint8_t addr, uint8_t qty, uint8_t data[])
 	uint8_t value = 0;
  80030cc:	2300      	movs	r3, #0
  80030ce:	f88d 3017 	strb.w	r3, [sp, #23]
-	result = HAL_I2C_Mem_Read(&HandleI2C, GESTURE_ADDRESS_I2C << 1, (uint16_t)addr, I2C_MEMADD_SIZE_8BIT, &value, 1, 10);
+	result = HAL_I2C_Mem_Write(&HandleI2C, GESTURE_ADDRESS_I2C << 1, addr, I2C_MEMADD_SIZE_8BIT, &value, 1, 10);
  80030d2:	f10d 0217 	add.w	r2, sp, #23
  80030d6:	2301      	movs	r3, #1
 static uint8_t registerRead(uint8_t addr, uint8_t qty, uint8_t data[])
  80030d8:	460d      	mov	r5, r1
-	result = HAL_I2C_Mem_Read(&HandleI2C, GESTURE_ADDRESS_I2C << 1, (uint16_t)addr, I2C_MEMADD_SIZE_8BIT, &value, 1, 10);
+	result = HAL_I2C_Mem_Write(&HandleI2C, GESTURE_ADDRESS_I2C << 1, addr, I2C_MEMADD_SIZE_8BIT, &value, 1, 10);
  80030da:	210a      	movs	r1, #10
  80030dc:	e9cd 3101 	strd	r3, r1, [sp, #4]
  80030e0:	9200      	str	r2, [sp, #0]
@@ -7254,7 +7252,7 @@ static uint8_t registerRead(uint8_t addr, uint8_t qty, uint8_t data[])
  80030e4:	4602      	mov	r2, r0
  80030e6:	21e6      	movs	r1, #230	; 0xe6
  80030e8:	481d      	ldr	r0, [pc, #116]	; (8003160 <registerRead.constprop.0+0x98>)
- 80030ea:	f7fd ff31 	bl	8000f50 <HAL_I2C_Mem_Read>
+ 80030ea:	f7fd fe7a 	bl	8000de2 <HAL_I2C_Mem_Write>
 	if (result != HAL_OK)
  80030ee:	4602      	mov	r2, r0
  80030f0:	b358      	cbz	r0, 800314a <registerRead.constprop.0+0x82>
@@ -7265,7 +7263,7 @@ static uint8_t registerRead(uint8_t addr, uint8_t qty, uint8_t data[])
 		printf("Error TX \n");
  80030fa:	481c      	ldr	r0, [pc, #112]	; (800316c <registerRead.constprop.0+0xa4>)
  80030fc:	f000 fa60 	bl	80035c0 <puts>
-	result = HAL_I2C_Mem_Write(&HandleI2C, GESTURE_ADDRESS_I2C << 1, (uint16_t)addr, I2C_MEMADD_SIZE_8BIT, data, qty, 10);
+	result = HAL_I2C_Mem_Read(&HandleI2C, GESTURE_ADDRESS_I2C << 1, addr, I2C_MEMADD_SIZE_8BIT, data, qty, 10);
  8003100:	2301      	movs	r3, #1
  8003102:	220a      	movs	r2, #10
  8003104:	e9cd 3201 	strd	r3, r2, [sp, #4]
@@ -7273,30 +7271,33 @@ static uint8_t registerRead(uint8_t addr, uint8_t qty, uint8_t data[])
  800310a:	9500      	str	r5, [sp, #0]
  800310c:	4622      	mov	r2, r4
  800310e:	21e6      	movs	r1, #230	; 0xe6
- 8003110:	f7fd fe67 	bl	8000de2 <HAL_I2C_Mem_Write>
+ 8003110:	f7fd ff1e 	bl	8000f50 <HAL_I2C_Mem_Read>
 	if (result != HAL_OK){
- 8003114:	4602      	mov	r2, r0
- 8003116:	b1e8      	cbz	r0, 8003154 <registerRead.constprop.0+0x8c>
+ 8003114:	4604      	mov	r4, r0
 		sprintf((char*)ref, "\r\n Error RX %d", result);
- 8003118:	4915      	ldr	r1, [pc, #84]	; (8003170 <registerRead.constprop.0+0xa8>)
- 800311a:	4813      	ldr	r0, [pc, #76]	; (8003168 <registerRead.constprop.0+0xa0>)
- 800311c:	f000 fa58 	bl	80035d0 <siprintf>
+ 8003116:	4602      	mov	r2, r0
+	if (result != HAL_OK){
+ 8003118:	b1e0      	cbz	r0, 8003154 <registerRead.constprop.0+0x8c>
+		sprintf((char*)ref, "\r\n Error RX %d", result);
+ 800311a:	4915      	ldr	r1, [pc, #84]	; (8003170 <registerRead.constprop.0+0xa8>)
+ 800311c:	4812      	ldr	r0, [pc, #72]	; (8003168 <registerRead.constprop.0+0xa0>)
+ 800311e:	f000 fa57 	bl	80035d0 <siprintf>
 		printf("Error RX \n");
- 8003120:	4814      	ldr	r0, [pc, #80]	; (8003174 <registerRead.constprop.0+0xac>)
- 8003122:	f000 fa4d 	bl	80035c0 <puts>
+ 8003122:	4814      	ldr	r0, [pc, #80]	; (8003174 <registerRead.constprop.0+0xac>)
+ 8003124:	f000 fa4c 	bl	80035c0 <puts>
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
- 8003126:	4810      	ldr	r0, [pc, #64]	; (8003168 <registerRead.constprop.0+0xa0>)
- 8003128:	f7fd f85a 	bl	80001e0 <strlen>
- 800312c:	490e      	ldr	r1, [pc, #56]	; (8003168 <registerRead.constprop.0+0xa0>)
- 800312e:	b282      	uxth	r2, r0
- 8003130:	f04f 33ff 	mov.w	r3, #4294967295
- 8003134:	4810      	ldr	r0, [pc, #64]	; (8003178 <registerRead.constprop.0+0xb0>)
- 8003136:	f7ff fb93 	bl	8002860 <HAL_UART_Transmit>
+ 8003128:	480f      	ldr	r0, [pc, #60]	; (8003168 <registerRead.constprop.0+0xa0>)
+ 800312a:	f7fd f859 	bl	80001e0 <strlen>
+ 800312e:	490e      	ldr	r1, [pc, #56]	; (8003168 <registerRead.constprop.0+0xa0>)
+ 8003130:	b282      	uxth	r2, r0
+ 8003132:	f04f 33ff 	mov.w	r3, #4294967295
+ 8003136:	4810      	ldr	r0, [pc, #64]	; (8003178 <registerRead.constprop.0+0xb0>)
+ 8003138:	f7ff fb92 	bl	8002860 <HAL_UART_Transmit>
 	HAL_Delay(1000);
- 800313a:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
- 800313e:	f7fd fb67 	bl	8000810 <HAL_Delay>
+ 800313c:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+ 8003140:	f7fd fb66 	bl	8000810 <HAL_Delay>
 };
- 8003142:	f89d 0017 	ldrb.w	r0, [sp, #23]
+ 8003144:	4620      	mov	r0, r4
  8003146:	b007      	add	sp, #28
  8003148:	bd30      	pop	{r4, r5, pc}
 		sprintf((char*)ref, "\r\n Transmitted %d", result);
@@ -7308,7 +7309,7 @@ static uint8_t registerRead(uint8_t addr, uint8_t qty, uint8_t data[])
  8003154:	490a      	ldr	r1, [pc, #40]	; (8003180 <registerRead.constprop.0+0xb8>)
  8003156:	4804      	ldr	r0, [pc, #16]	; (8003168 <registerRead.constprop.0+0xa0>)
  8003158:	f000 fa3a 	bl	80035d0 <siprintf>
- 800315c:	e7e3      	b.n	8003126 <registerRead.constprop.0+0x5e>
+ 800315c:	e7e4      	b.n	8003128 <registerRead.constprop.0+0x60>
  800315e:	bf00      	nop
  8003160:	20000340 	.word	0x20000340
  8003164:	0800489e 	.word	0x0800489e
@@ -7587,18 +7588,18 @@ uint8_t gestureInit(void)
  8003392:	f000 f88f 	bl	80034b4 <iprintf>
 	}
 
-	for(int i = 0; i < InitialRegister; i++){
+	for(int i = 0; i < initialRegister; i++){
  8003396:	4e13      	ldr	r6, [pc, #76]	; (80033e4 <gestureInit+0xa0>)
 		result = 1;
  8003398:	2500      	movs	r5, #0
 		registerWrite(RegisterArray[i][0], RegisterArray[i][1]);
  800339a:	7871      	ldrb	r1, [r6, #1]
  800339c:	f816 0b02 	ldrb.w	r0, [r6], #2
-	for(int i = 0; i < InitialRegister; i++){
+	for(int i = 0; i < initialRegister; i++){
  80033a0:	3501      	adds	r5, #1
 		registerWrite(RegisterArray[i][0], RegisterArray[i][1]);
  80033a2:	f7ff fe55 	bl	8003050 <registerWrite>
-	for(int i = 0; i < InitialRegister; i++){
+	for(int i = 0; i < initialRegister; i++){
  80033a6:	2ddb      	cmp	r5, #219	; 0xdb
  80033a8:	d1f7      	bne.n	800339a <gestureInit+0x56>
 	}
