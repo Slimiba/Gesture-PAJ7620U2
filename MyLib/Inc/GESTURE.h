@@ -11,7 +11,7 @@
 
 I2C_HandleTypeDef HandleI2C; /* HandleI2C pointer for I2C Type Def */
 UART_HandleTypeDef huart3; /* huart3 pointer */
-HAL_StatusTypeDef statatus; /* Variable for status type for hal functions */
+HAL_StatusTypeDef status; /* Variable for status type for hal functions */
 
 
 void GESTURE_Actions(void); /* Sets action flags for gestures */
