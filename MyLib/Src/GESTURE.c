@@ -510,10 +510,22 @@ uint8_t gestureInit(void)
 	}else{
 		strcpy((char*)ref, "\n\r Device Is Ready!");
 	} */
-
-	for(int i = 0; i < initialRegister; i++){
+	for (int i = 0; i < initialRegister; i++){
 		registerWrite(RegisterArray[i][0], RegisterArray[i][1]);
 	}
+	for( int i = 0; i < initialProximityRegister; i++){
+		registerWrite(ProximityArray[i][0], ProximityArray[i][1]);
+	}
+	for (int i = 0; i < initialGestureRegister; i++){
+		registerWrite(GestureArray[i][0], GestureArray[i][1]);
+	}
+	for (int i = 0; i < initialSuspendRegister; i++){
+		registerWrite(SuspendArray[i][0], SuspendArray[i][1]);
+	}
+	for (int i = 0; i < initialResumeRegister; i++){
+		registerWrite(ResumeArray[i][0], ResumeArray[i][0]);
+	}
+
 
 	registerWrite(GESTURE_REG_BANK_SEL, GESTURE_BANK0);
 	HAL_UART_Transmit(&huart3, ref, strlen((char*)ref), HAL_MAX_DELAY);
