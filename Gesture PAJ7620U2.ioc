@@ -59,6 +59,7 @@ RCC.AHBFreq_Value=72000000
 RCC.TIM2Freq_Value=72000000
 Mcu.Pin0=PC13
 Mcu.Pin1=PC14-OSC32_IN
+GPIO.groupedBy=Group By Peripherals
 Mcu.Pin2=PC15-OSC32_OUT
 Mcu.Pin3=PF0-OSC_IN
 RCC.USART3Freq_Value=36000000

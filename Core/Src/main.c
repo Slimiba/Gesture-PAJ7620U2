@@ -109,13 +109,14 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_Delay(700);
-	  initializeRegisters();
-	  GESTURE_Actions();
+	  /* HAL_Delay(700); */
+	 /*  initializeRegisters(); */
+	 /*  GESTURE_Actions(); */
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
+	  HAL_Delay(700);
+	  GESTURE_Actions();
   }
   /* USER CODE END 3 */
 }

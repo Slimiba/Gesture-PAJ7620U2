@@ -69,7 +69,9 @@
 /* #define GestureNone GESTURE_Value(1,8) */
 
 #define initialRegister (sizeof(RegisterArray)/sizeof(RegisterArray[0]))
-
-
+#define initialGestureRegister (sizeof(GestureArray)/sizeof(GestureArray[0]))
+#define initialProximityRegister (sizeof(ProximityArray)/sizeof(ProximityArray[0]))
+#define initialSuspendRegister (sizeof(SuspendArray)/sizeof(SuspendArray[0]))
+#define initialResumeRegister (sizeof(ResumeArray)/sizeof(ResumeArray)[0])
 
 #endif /* INC_GESTURECONF_H_ */

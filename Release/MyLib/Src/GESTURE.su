@@ -1,5 +1,4 @@
-GESTURE.c:386:13:registerWrite	32	static
-GESTURE.c:351:16:registerRead.constprop	40	static
-GESTURE.c:245:6:GESTURE_Actions	16	static
-GESTURE.c:409:9:gestureInit	24	static
-GESTURE.c:230:6:initializeRegisters	8	static
+GESTURE.c:388:16:registerWrite	32	static
+GESTURE.c:353:16:registerRead.constprop	40	static
+GESTURE.c:412:9:gestureInit	24	static
+GESTURE.c:233:6:GESTURE_Actions	16	static
